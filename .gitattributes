@@ -1,0 +1,2 @@
+templates/**/*.xml filter=xml-c14n
+templates/**/*.rels filter=xml-c14n

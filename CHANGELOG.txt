@@ -1,0 +1,86 @@
+CHANGELOG
+Version 0.6.0
+* Improve support for inline elements
+* Add basic support for section and article elements
+
+Version 0.5.1
+* Bugfix on ActionController::Renderers formats
+
+Version 0.5
+* Better handling of external links
+* Better handling of inline elements
+* Better support for complex lists
+
+Version 0.4.4
+* Update default template to remove language
+* Bug fixes on lists and tables having br elements
+* Bug fixes on lists having inline elements and div or p tags
+* Bug fix on corrupted docx files generated in Windows
+* Add basic support to 'pre' tag
+
+Version 0.4.3
+* Add method that generates and saves the document to a file in a specific file path
+
+Version 0.4.2
+* Fix broken default template
+* List support
+* Support table cells bordering in the base xslt
+* br tag support
+
+Version 0.4.1
+* Include forgotten templates and xslt
+
+Version 0.4
+* Do not render output to file, but rather to a buffer.
+  This means that apps using the gem no longer needs write permissions on a filesystem.
+* Support of table borders using the extra xslt
+* Support of basic lists using the extra xslt
+* Use of blockquotes as a replacement for spacing usint the extra xslt
+* Add a command line interface
+* Fixes on default template metadata
+
+
+Version 0.2
+* Relocation of templates and xslt files
+* Enable gem configuration to set the location of default and custom word templates and xslt.
+* Allow the Htmltoword::Document.create to receive custom templates
+* Add .docx as a renderer when used with rails.
+
+Version 0.1.8
+* Better alignment of text within a paragraph, div or table cell if it has a 'center', 'left', 'right', 'justify' class or by using the text-align property.
+* Support for table-bordered class on tables
+* Support for bold and italic text on table cells
+* Support for h1..h6 on table cells
+* Support for nested tables
+* Bugfix: thead without tr tag
+* Bugfix: nested bold and italic on paragraphs or div
+* Bugfix: allow <td><div>Some content <em>inside</em> a <strong>div</strong></div></td> syntax
+* Bugfix: Headings in body tag are now correctly parsed
+
+Version 0.1.7
+* Allow centering of text within a paragraph if the paragraph has a 'center' class, e.g. <p class='center'>
+
+Version 0.1.6:
+* Add tables support for borders and headers
+
+Version 0.1.5:
+* Bugfix: h5 & h6 also create w:p's so any wrapping divs dont need to.
+
+Version 0.1.4:
+* Details tag doesnt really work well for printing. By default its closed and not visible until you click on the summary so for now lets ignore it in the print out.
+
+Version 0.1.3:
+* Bugfix: Leaf i and b nodes with w:p creating siblings need to create their own w:p's.
+
+Version 0.1.2:
+* Bugfix: span.h (MS Word Highlights) with sibling block elements could result in invalid wordml.
+
+Version 0.1.1:
+* Nodes with neighbor nodes that create w:p's need to be wrapped in w:p themselves.
+* Fixed test suite.
+
+Version 0.1.0:
+* Rewrote xslt to support tables and updated rubyzip to v1.
+
+Version 0.0.1:
+* First basic implementation of htmltoword released.
