@@ -1,28 +1,28 @@
 # encoding: UTF-8
-require 'nokogiri'
-require 'zip'
-require_relative 'htmltoword/configuration'
+require_relative "element/container"
+require_relative "element/section"
+require_relative 'style/section'
+require_relative 'writer/writer'
 
-module Htmltoword
-  class << self
-    def configure
-      yield configuration
+module Rubyword
+  class Rubyword
+    attr_accessor :sections
+    
+    def initialize
+      @sections = []
     end
 
-    def configuration
-      @configuration ||= Configuration.new
+    def addSection(style = nil)
+      @section = Element::Section.new(@sections.count + 1, style)
+      @sections.push(@section)
+
+      @section
     end
 
-    alias_method :config, :configuration
+    def save
+      writer = Writer::Writer.new
+      writer.save
+    end
   end
 end
 
-require_relative 'htmltoword/version'
-require_relative 'htmltoword/helpers/templates_helper'
-require_relative 'htmltoword/helpers/xslt_helper'
-require_relative 'htmltoword/document'
-
-if defined?(Rails)
-  require_relative 'htmltoword/renderer'
-  require_relative 'htmltoword/railtie'
-end
