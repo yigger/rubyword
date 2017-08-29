@@ -20,6 +20,7 @@ module Rubyword
     end
 
     def save
+      # part
       writer = Writer::Writer.new
       writer.save
     end
