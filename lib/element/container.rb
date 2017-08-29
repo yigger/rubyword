@@ -17,7 +17,7 @@ module Rubyword
         if functions.keys.include?(method_name)
           begin
             module_name = functions[method_name]
-            require_relative module_name
+            require_relative module_name.downcase
             eval "#{module_name}.new(args)"
           rescue => ex
             puts "Container Error __LINE__ #{__LINE__}: #{ex.message}"
