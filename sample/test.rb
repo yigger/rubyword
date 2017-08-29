@@ -3,19 +3,24 @@ require_relative '../lib/rubyword'
 rubyword = Rubyword::Rubyword.new
 section = rubyword.addSection
 section.addText('xixi')
-rubyword.save
-# def test
-#   <<-STR
-#   <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-#   <Relationships
-#       xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-#       <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>
-#       <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>
-#       <Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties" Target="docProps/custom.xml"/>
-#       <Relationship Id="rId4" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-#   STR
+# rubyword.save
+
+# openXMLPrefix = 'application/vnd.openxmlformats-';
+# wordMLPrefix  = "#{openXMLPrefix}officedocument.wordprocessingml";
+# overrides = {
+#   '/docProps/core.xml' => "#{openXMLPrefix}package.core-properties+xml",
+#   '/docProps/app.xml' => "#{openXMLPrefix}officedocument.extended-properties+xml",
+#   '/docProps/custom.xml' => "#{openXMLPrefix}officedocument.custom-properties+xml",
+#   '/word/document.xml' => "#{wordMLPrefix }document.main+xml",
+#   '/word/styles.xml' => "#{wordMLPrefix }styles+xml",
+#   '/word/numbering.xml' => "#{wordMLPrefix }numbering+xml",
+#   '/word/settings.xml' => "#{wordMLPrefix }settings+xml",
+#   '/word/theme/theme1.xml' => "#{openXMLPrefix}officedocument.theme+xml",
+#   '/word/webSettings.xml' => "#{wordMLPrefix }webSettings+xml",
+#   '/word/fontTable.xml' => "#{wordMLPrefix }fontTable+xml"
+# }
+# puts overrides.keys[0]
+# 10.times.each do |r|
+#   puts r
 # end
-# puts test
-# puts Rubyword::TEMP_PATH
-# include Rubyword::XmlBuilderHelper
-# puts Rubyword::XmlBuilderHelper::content_types
+puts Rubyword::XmlBuilderHelper::numbering
