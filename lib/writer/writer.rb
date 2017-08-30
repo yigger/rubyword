@@ -14,7 +14,7 @@ module Rubyword
         'settings' => 'word/settings.xml',
         'web_settings' => 'word/webSettings.xml',
         'font_table' => 'word/fontTable.xml',
-        'theme' => 'word/theme/theme1.xml'
+        # 'theme' => 'word/theme/theme1.xml'
         # 'RelsPart' => '',
         # 'Header' => '',
         # 'Footer' => '',
@@ -25,17 +25,16 @@ module Rubyword
 
       def save
         filename = File.join(::Rubyword::TEMP_PATH, 'test.docx')
-        
-        # buffer = Zip::OutputStream.write_buffer do |zio|
-        #   ZIP_FILES.each do |helper_method, entry|
-        #     source = eval("::Rubyword::XmlBuilderHelper::#{helper_method}")
-        #     zio.put_next_entry(entry)
-        #     zio.write(source)
-        #   end
-        # end
-        # file = File.new(filename,'wb')
-        # file.write(buffer.string)
-        # file.close
+        buffer = Zip::OutputStream.write_buffer do |zio|
+          ZIP_FILES.each do |helper_method, entry|
+            source = eval("::Rubyword::XmlBuilderHelper::#{helper_method}")
+            zio.put_next_entry(entry)
+            zio.write(source)
+          end
+        end
+        file = File.new(filename,'wb')
+        file.write(buffer.string)
+        file.close
       rescue => ex
         puts ex.message
       end

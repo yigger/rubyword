@@ -12,6 +12,7 @@ require_relative 'helpers/xml_builder_helper'
 
 module Rubyword
   TEMP_PATH = File.join(File.expand_path('../../', __FILE__), 'temp')
+  WORD_TEMP_PATH = File.join(File.expand_path('../../', __FILE__), 'template')
   class Rubyword
     attr_accessor :sections
     VERSION = '0.1.0'
