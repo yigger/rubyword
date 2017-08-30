@@ -24,7 +24,7 @@ module Rubyword
       }
 
       def save
-        filename = File.join(::Rubyword::TEMP_PATH, 'test.docx')
+        filename = File.join(::Rubyword::TEMP_PATH, 'test.zip')
         buffer = Zip::OutputStream.write_buffer do |zio|
           ZIP_FILES.each do |helper_method, entry|
             source = eval("::Rubyword::XmlBuilderHelper::#{helper_method}")
