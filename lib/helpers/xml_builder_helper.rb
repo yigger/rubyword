@@ -8,13 +8,13 @@ module Rubyword
 					'/docProps/core.xml' => "#{openXMLPrefix}package.core-properties+xml",
 					'/docProps/app.xml' => "#{openXMLPrefix}officedocument.extended-properties+xml",
 					'/docProps/custom.xml' => "#{openXMLPrefix}officedocument.custom-properties+xml",
-					'/word/document.xml' => "#{wordMLPrefix }document.main+xml",
-					'/word/styles.xml' => "#{wordMLPrefix }styles+xml",
-					'/word/numbering.xml' => "#{wordMLPrefix }numbering+xml",
-					'/word/settings.xml' => "#{wordMLPrefix }settings+xml",
+					'/word/document.xml' => "#{wordMLPrefix}.document.main+xml",
+					'/word/styles.xml' => "#{wordMLPrefix}.styles+xml",
+					'/word/numbering.xml' => "#{wordMLPrefix}.numbering+xml",
+					'/word/settings.xml' => "#{wordMLPrefix}.settings+xml",
 					'/word/theme/theme1.xml' => "#{openXMLPrefix}officedocument.theme+xml",
-					'/word/webSettings.xml' => "#{wordMLPrefix }webSettings+xml",
-					'/word/fontTable.xml' => "#{wordMLPrefix }fontTable+xml"
+					'/word/webSettings.xml' => "#{wordMLPrefix}.webSettings+xml",
+					'/word/fontTable.xml' => "#{wordMLPrefix}.fontTable+xml"
 				}
 				
 				builder = Nokogiri::XML::Builder.new do |xml|
@@ -130,11 +130,13 @@ module Rubyword
 			end
 
 			def document
-				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml')))
+				# 有问题
+				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
 			end
 
 			def styles
-				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'styles.xml')))
+				# 有问题
+				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'styles.xml'))).to_xml
 			end
 			
 			def settings
@@ -236,7 +238,8 @@ module Rubyword
 			end
 			
 			def font_table
-				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'fontTable.xml')))
+				# 有问题
+				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'fontTable.xml'))).to_xml
 			end
 		end
   end

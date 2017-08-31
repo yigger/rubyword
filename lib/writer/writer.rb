@@ -23,8 +23,8 @@ module Rubyword
         # 'Chart' => ''
       }
 
-      def save
-        filename = File.join(::Rubyword::TEMP_PATH, 'test.zip')
+      def save(filename)
+        filename = File.join(::Rubyword::TEMP_PATH, filename)
         buffer = Zip::OutputStream.write_buffer do |zio|
           ZIP_FILES.each do |helper_method, entry|
             source = eval("::Rubyword::XmlBuilderHelper::#{helper_method}")

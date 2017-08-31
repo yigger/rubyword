@@ -27,10 +27,10 @@ module Rubyword
       @section
     end
 
-    def save
+    def save(filename = 'test.doc')
       # part
       writer = Writer::Writer.new
-      writer.save
+      writer.save(filename)
     end
   end
 end
