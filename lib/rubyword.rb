@@ -4,11 +4,15 @@ require 'nokogiri'
 require 'zip'
 
 # get local package
-require_relative "element/container"
-require_relative "element/section"
+require_relative 'element/container'
+require_relative 'element/section'
 require_relative 'style/section'
-require_relative 'writer/writer'
-require_relative 'helpers/xml_builder_helper'
+require_relative 'writer/base'
+Dir.foreach(File.join(File.dirname(__FILE__), 'writer')) do |filename|
+  unless ['.', '..', 'base'].include?(filename)
+    require_relative "writer/#{filename}"
+  end
+end
 
 module Rubyword
   TEMP_PATH = File.join(File.expand_path('../../', __FILE__), 'temp')
