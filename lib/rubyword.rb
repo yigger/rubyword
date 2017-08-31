@@ -15,11 +15,12 @@ Dir.foreach(File.join(File.dirname(__FILE__), 'writer')) do |filename|
 end
 
 module Rubyword
+  VERSION = '0.1.0'
   TEMP_PATH = File.join(File.expand_path('../../', __FILE__), 'temp')
   WORD_TEMP_PATH = File.join(File.expand_path('../../', __FILE__), 'template')
+
   class Rubyword
     attr_accessor :sections
-    VERSION = '0.1.0'
     def initialize
       @sections = []
     end
@@ -33,9 +34,10 @@ module Rubyword
 
     def save(filename = 'test.doc')
       # part
-      writer = Writer::Writer.new
+      writer = Writer::Writer.new(self)
       writer.save(filename)
     end
   end
+  
 end
 
