@@ -14,7 +14,7 @@ module Rubyword
       }
 
       def write
-        puts @rubyword.sections
+        puts @rubyword.sections.count
 
         # builder = Nokogiri::XML::Builder.new do |xml|
 				# 	xml.Document(DOCUMENT_ATTR) {
