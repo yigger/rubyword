@@ -14,7 +14,7 @@ module Rubyword
       }
 
       def write
-        puts @rubyword.sections.count
+        # puts @rubyword.sections.count
 
         # builder = Nokogiri::XML::Builder.new do |xml|
 				# 	xml.Document(DOCUMENT_ATTR) {
@@ -23,7 +23,7 @@ module Rubyword
         #     }
         #   }
 				# end
-				# Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
+				Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
       end
 
     end

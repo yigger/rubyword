@@ -7,21 +7,21 @@ module Rubyword
       end
 
       def save(filename)
-        obj = Object.const_get('Rubyword::Writer::Document').new(@rubyword)
-        puts obj.write
+        # obj = Object.const_get('Rubyword::Writer::Document').new(@rubyword)
+        # puts obj.write
 
-        # filename = File.join(::Rubyword::TEMP_PATH, filename)
-        # buffer = Zip::OutputStream.write_buffer do |zio|
-        #   zip_files.each do |helper_method, entry|
-        #     obj = Object.const_get("Rubyword::Writer::#{helper_method}").new(@rubyword)
-        #     source = obj.write
-        #     zio.put_next_entry(entry)
-        #     zio.write(source)
-        #   end
-        # end
-        # file = File.new(filename,'wb')
-        # file.write(buffer.string)
-        # file.close
+        filename = File.join(::Rubyword::TEMP_PATH, filename)
+        buffer = Zip::OutputStream.write_buffer do |zio|
+          zip_files.each do |helper_method, entry|
+            obj = Object.const_get("Rubyword::Writer::#{helper_method}").new(@rubyword)
+            source = obj.write
+            zio.put_next_entry(entry)
+            zio.write(source)
+          end
+        end
+        file = File.new(filename,'wb')
+        file.write(buffer.string)
+        file.close
       rescue => ex
         puts ex.message
       end
@@ -39,8 +39,8 @@ module Rubyword
           'Numbering' => 'word/numbering.xml',
           'Settings' => 'word/settings.xml',
           'WebSettings' => 'word/webSettings.xml',
-          'FontTable' => 'word/fontTable.xml'
-          # 'theme' => 'word/theme/theme1.xml'
+          'FontTable' => 'word/fontTable.xml',
+          'Theme' => 'word/theme/theme1.xml'
           # 'RelsPart' => '',
           # 'Header' => '',
           # 'Footer' => '',
