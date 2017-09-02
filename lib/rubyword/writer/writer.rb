@@ -7,13 +7,12 @@ module Rubyword
       end
 
       def save(filename)
-        # obj = Object.const_get('Rubyword::Writer::Document').new(@rubyword)
+        # obj = Document.new(@rubyword)
         # puts obj.write
-
         filename = File.join(::Rubyword::TEMP_PATH, filename)
         buffer = Zip::OutputStream.write_buffer do |zio|
           zip_files.each do |helper_method, entry|
-            obj = Object.const_get("Rubyword::Writer::#{helper_method}").new(@rubyword)
+            obj = eval "#{helper_method}.new(@rubyword)"
             source = obj.write
             zio.put_next_entry(entry)
             zio.write(source)
