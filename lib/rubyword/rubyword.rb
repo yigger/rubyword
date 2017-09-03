@@ -13,8 +13,7 @@ module Rubyword
     end
 
     def save(filename = 'test.doc')
-      # part
-      writer = Writer::Writer.new(self)
+      writer = Writer::Part::Writer.new(self)
       writer.save(filename)
     end
   end

@@ -1,15 +1,22 @@
-require_relative 'writer/writer'
-require_relative 'writer/base'
-require_relative 'writer/content_types'
-require_relative 'writer/doc_props_app'
-require_relative 'writer/doc_props_core'
-require_relative 'writer/doc_props_custom'
-require_relative 'writer/document'
-require_relative 'writer/font_table'
-require_relative 'writer/numbering'
-require_relative 'writer/rels_document'
-require_relative 'writer/rels'
-require_relative 'writer/settings'
-require_relative 'writer/styles'
-require_relative 'writer/theme'
-require_relative 'writer/web_settings'
+part_path = "writer/part".freeze
+require_relative "#{part_path}/base"
+require_relative "#{part_path}/content_types"
+require_relative "#{part_path}/doc_props_app"
+require_relative "#{part_path}/doc_props_core"
+require_relative "#{part_path}/doc_props_custom"
+require_relative "#{part_path}/document"
+require_relative "#{part_path}/font_table"
+require_relative "#{part_path}/numbering"
+require_relative "#{part_path}/rels_document"
+require_relative "#{part_path}/rels"
+require_relative "#{part_path}/settings"
+require_relative "#{part_path}/styles"
+require_relative "#{part_path}/theme"
+require_relative "#{part_path}/web_settings"
+require_relative "#{part_path}/writer"
+style_path = "writer/style".freeze
+require_relative "#{style_path}/base"
+require_relative "#{style_path}/section"
+element_path = "writer/element".freeze
+require_relative "#{element_path}/base"
+require_relative "#{element_path}/container"
