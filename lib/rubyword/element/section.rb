@@ -1,23 +1,15 @@
 module Rubyword
   module Element
-    class Section < Container
-      attr_accessor :section_id, :style
-
+    class Section
+      attr_accessor :section_id, :style, :text, :aa
+      
       def initialize(section_count, style = nil)
         @section_id = section_count
         @style = Style::Section.new(style)
       end
 
-      def headers
-
-      end
-
-      def footers
-
-      end
-
-      def different_first_page
-
+      def generate(&block)
+        !block.nil? && block.arity < 1 ? instance_eval(&block) : block[self]
       end
 
     end

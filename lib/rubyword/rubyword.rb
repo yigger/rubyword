@@ -8,7 +8,6 @@ module Rubyword
     def addSection(style = nil)
       @section = Element::Section.new(@sections.count + 1, style)
       @sections.push(@section)
-
       @section
     end
 

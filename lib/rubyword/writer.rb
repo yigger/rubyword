@@ -19,4 +19,4 @@ require_relative "#{style_path}/base"
 require_relative "#{style_path}/section"
 element_path = "writer/element".freeze
 require_relative "#{element_path}/base"
-require_relative "#{element_path}/container"
+require_relative "#{element_path}/text"

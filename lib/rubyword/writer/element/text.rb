@@ -1,9 +1,9 @@
 module Rubyword
   module Writer
     module Element
-      class Container < Base
+      class Text < Base
         def write
-          'test'
+          puts @section.text
         end
       end
     end

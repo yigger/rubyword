@@ -6,3 +6,4 @@
 Gemfile.lock
 temp
 .idea/*
+.vscode

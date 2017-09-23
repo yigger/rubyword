@@ -20,9 +20,16 @@ module Rubyword
           if sections_count > 0
             @rubyword.sections.each do |section|
               current_section = current_section + 1
-              # Container write
-              Element::Container.new(section).write
-
+              section.instance_variables.each do |v|
+                instance_name = v.to_s[1..-1].capitalize
+                class_name = "Element::#{instance_name}"
+                if eval("defined?(#{class_name}) && #{class_name}.is_a?(Class)")
+                  eval "#{class_name}.new(section).write"
+                else
+                  next
+                end
+              end
+              
               if current_section == sections_count
                 Style::Section.new(section.style).write
               else
