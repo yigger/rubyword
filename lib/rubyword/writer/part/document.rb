@@ -15,46 +15,44 @@ module Rubyword
         }
 
         def write
+          builder = Nokogiri::XML::Builder.new do |xml|
+            xml.send('w:document', DOCUMENT_ATTR) {
+              xml.send('w:body') {
+                section_write(xml).each{|x| x}
+              }
+            }
+          end
+          builder.to_xml
+          # Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
+        end
+
+
+        def section_write(xml)
+          @object_blocks = []
           sections_count = @rubyword.sections.count
           current_section = 0
-          if sections_count > 0
-            @rubyword.sections.each do |section|
-              current_section = current_section + 1
-              section.instance_variables.each do |v|
-                instance_name = v.to_s[1..-1].capitalize
-                class_name = "Element::#{instance_name}"
-                if eval("defined?(#{class_name}) && #{class_name}.is_a?(Class)")
-                  eval "#{class_name}.new(section).write"
-                else
-                  next
-                end
-              end
-              
-              if current_section == sections_count
-                Style::Section.new(section.style).write
+          @rubyword.sections.each do |section|
+            current_section = current_section + 1
+            section.instance_variables.each do |v|
+              instance_name = v.to_s[1..-1].capitalize
+              class_name = "Element::#{instance_name}"
+              if eval("defined?(#{class_name}) && #{class_name}.is_a?(Class)")
+                @object_blocks.push(eval "#{class_name}.new(section).write(xml)")
               else
-                write_section(section)
+                next
               end
             end
+            
+            if current_section == sections_count
+              @object_blocks.push(Style::Section.new(section.style).write(xml))
+            else
+              write_section(section)
+            end
           end
-
-
-          # builder = Nokogiri::XML::Builder.new do |xml|
-          # 	xml.Document(DOCUMENT_ATTR) {
-          #     xml.send('w:body') {
-
-          #     }
-          #   }
-          # end
-          Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
+          @object_blocks
         end
-
-
-        def write_section(section)
-
-        end
-
-      end
+        
+      end # end of class
     end
   end
 end

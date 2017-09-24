@@ -1,5 +1,5 @@
 module Rubyword
-  class Rubyword
+  class Document
     attr_accessor :sections
     def initialize
       @sections = []

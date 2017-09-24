@@ -11,10 +11,10 @@ fontStyle = {
   'size' => 20
 }
 
-rubyword = Rubyword::Rubyword.new
+rubyword = Rubyword::Document.new
 section = rubyword.addSection
 section.generate{|sc|
-  sc.text = 'hello world'
+  sc.text = "hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello"
   # sc.style = fontStyle
 }
 
