@@ -1,11 +1,15 @@
 module Rubyword
   module Element
     class Section
-      attr_accessor :section_id, :style, :text, :aa
-      
+      attr_accessor :section_id, :style, :text, :footer
+
       def initialize(section_count, style = nil)
         @section_id = section_count
         @style = Style::Section.new(style)
+      end
+
+      def addFooter
+        footer = Footer.new
       end
 
       def generate(&block)

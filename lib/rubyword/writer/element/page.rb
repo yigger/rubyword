@@ -1,7 +1,7 @@
 module Rubyword
   module Writer
     module Element
-      class Text < Base
+      class Page < Base
         
         def write(xml)
           xml.send('w:p') do

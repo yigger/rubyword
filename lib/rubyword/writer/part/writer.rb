@@ -10,8 +10,11 @@ module Rubyword
         def save(filename)
           filename = File.join(::Rubyword::TEMP_PATH, filename)
           buffer = Zip::OutputStream.write_buffer do |zio|
+            # add header and footer
+            add_footer_content(zio)
+
             zip_files.each do |helper_method, entry|
-              obj = eval "#{helper_method}.new(@rubyword)"
+              obj = eval "#{helper_method}.new(rubyword)"
               source = obj.write
               zio.put_next_entry(entry)
               zio.write(source)
@@ -22,6 +25,14 @@ module Rubyword
           file.close
         rescue => ex
           puts ex.message
+        end
+
+        def add_footer_content(zio)
+          elmFile = "word/footer1.xml"
+          obj = Footer.new(rubyword)
+          source = obj.write
+          zio.put_next_entry(elmFile)
+          zio.write(source)
         end
 
         def zip_files
