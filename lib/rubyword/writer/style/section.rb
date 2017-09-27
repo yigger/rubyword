@@ -5,6 +5,12 @@ module Rubyword
         def write(xml)
           # @section.break_type
           xml.send('w:sectPr') {
+            # footerReference
+            xml.send('w:footerReference', {
+              'w:type' => 'default',
+              'r:id' => section.rid
+            })
+            
             # pgsize
             xml.send('w:pgSz', {
               'w:orient' => @style.orientation,

@@ -1,15 +1,21 @@
+# -*- coding: utf-8 -*-
+require_relative 'base'
+require_relative 'text'
+require_relative 'footer'
+
 module Rubyword
   module Element
-    class Section
-      attr_accessor :section_id, :style, :text, :footer
+    class Section < Base
+      
+      include Text
+      include Footer
 
+      attr_accessor :section_id, :style
+      
       def initialize(section_count, style = nil)
         @section_id = section_count
         @style = Style::Section.new(style)
-      end
-
-      def addFooter
-        footer = Footer.new
+        super()
       end
 
       def generate(&block)

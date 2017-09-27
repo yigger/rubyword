@@ -35,18 +35,15 @@ module Rubyword
             current_section = current_section + 1
             section.instance_variables.each do |v|
               instance_name = v.to_s[1..-1].capitalize
-              class_name = "Element::#{instance_name}"
-              if eval("defined?(#{class_name}) && #{class_name}.is_a?(Class)")
-                @object_blocks.push(eval "#{class_name}.new(section).write(xml)")
-              else
-                next
+              if ['Text'].include?(instance_name)
+                @object_blocks.push(section.send("#{instance_name.downcase}_write", xml))
               end
             end
-            
+
             if current_section == sections_count
-              @object_blocks.push(Style::Section.new(section.style).write(xml))
+              @object_blocks.push(Style::Section.new(section).write(xml))
             else
-              write_section(section)
+              # write_section(section)
             end
           end
           @object_blocks

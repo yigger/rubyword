@@ -15,12 +15,12 @@ rubyword = Rubyword::Document.new
 section = rubyword.addSection
 
 section.generate{|sc|
-  sc.text = "hello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello worldhello"
+  sc.text = "Hello World"
   # sc.style = fontStyle
 }
-footer = section.addFooter
+section.pagination("number")
 
 # puts section.text
 # puts section.instance_variables.map{|v|v.to_s[1..-1]}
-rubyword.save('hello.zip')
+rubyword.save('hello.docx')
 

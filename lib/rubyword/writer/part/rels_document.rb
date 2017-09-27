@@ -13,10 +13,13 @@ module Rubyword
 					}
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Relationships(xmlns: 'http://schemas.openxmlformats.org/package/2006/relationships') do
-							6.times.each do |num|
+							RELS_RID.times.each do |num|
 								id_num = num + 1
 								xml.Relationship(Id: "rId#{id_num}", Type: xmlRels.values[num], Target: xmlRels.keys[num])
 							end
+							# if @rubyword.sections.first.objects.keys.include?(:footer)
+								
+							# end
 						end
 					end
 					builder.to_xml

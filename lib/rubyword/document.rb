@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+require_relative "element/section"
+require_relative "writer"
 module Rubyword
   class Document
+    include Writer
     attr_accessor :sections
     def initialize
       @sections = []
@@ -9,11 +13,6 @@ module Rubyword
       @section = Element::Section.new(@sections.count + 1, style)
       @sections.push(@section)
       @section
-    end
-
-    def save(filename = 'test.doc')
-      writer = Writer::Part::Writer.new(self)
-      writer.save(filename)
     end
   end
   

@@ -2,9 +2,10 @@ module Rubyword
   module Writer
     module Style
       class Base
-        attr_accessor :style
-        def initialize(style)
-          @style = style
+        attr_accessor :style, :section
+        def initialize(section)
+          @style = section.style
+          @section = section
         end
       end
     end
