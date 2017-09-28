@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Rubyword
   module Element
     class Container

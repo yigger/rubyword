@@ -1,11 +1,4 @@
 require_relative '../lib/rubyword'
-class Factory
-  attr_accessor :text
-  def initialize
-    
-  end
-end
-
 fontStyle = {
   'name' => 'Times New Roman',
   'size' => 20

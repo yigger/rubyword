@@ -2,19 +2,23 @@
 require_relative 'base'
 require_relative 'text'
 require_relative 'footer'
+require_relative 'rels'
 
 module Rubyword
   module Element
     class Section < Base
       
       include Text
+      include Rels
       include Footer
 
-      attr_accessor :section_id, :style
+      attr_accessor :section_id, :style, :relation_rids, :init_rid
       
       def initialize(section_count, style = nil)
         @section_id = section_count
         @style = Style::Section.new(style)
+        @init_rid = 6
+        @relation_rids = []
         super()
       end
 

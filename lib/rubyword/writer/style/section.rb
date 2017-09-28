@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Rubyword
   module Writer
     module Style
@@ -6,10 +7,13 @@ module Rubyword
           # @section.break_type
           xml.send('w:sectPr') {
             # footerReference
-            xml.send('w:footerReference', {
-              'w:type' => 'default',
-              'r:id' => section.rid
-            })
+
+            section.relation_rids.each do |relation|
+              xml.send('w:footerReference', {
+                'w:type' => 'default',
+                'r:id' => "rId#{relation[:rid]}"
+              })
+            end
             
             # pgsize
             xml.send('w:pgSz', {

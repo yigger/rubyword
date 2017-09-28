@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# -*- encoding : utf-8 -*-
 # get remote package
 require 'nokogiri'
 require 'zip'

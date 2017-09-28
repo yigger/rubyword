@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Rubyword
 	module Writer
 		module Part
@@ -17,9 +18,10 @@ module Rubyword
 								id_num = num + 1
 								xml.Relationship(Id: "rId#{id_num}", Type: xmlRels.values[num], Target: xmlRels.keys[num])
 							end
-							# if @rubyword.sections.first.objects.keys.include?(:footer)
-								
-							# end
+
+							rubyword.sections.each do |section|
+								section.send("rels_write", xml)
+							end
 						end
 					end
 					builder.to_xml
