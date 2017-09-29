@@ -24,7 +24,6 @@ module Rubyword
             }
           end
           builder.to_xml
-          # Nokogiri::XML(open(File.join(::Rubyword::WORD_TEMP_PATH, 'document.xml'))).to_xml
         end
 
 

@@ -4,10 +4,8 @@ module Rubyword
     module Style
       class Section < Base
         def write(xml)
-          # @section.break_type
           xml.send('w:sectPr') {
-            # footerReference
-
+            # header or footerReference
             section.relation_rids.each do |relation|
               xml.send("w:#{relation[:type]}Reference", {
                 'w:type' => 'default',

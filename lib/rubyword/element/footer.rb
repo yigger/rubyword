@@ -10,6 +10,7 @@ module Rubyword
 
       def pagination(page_style)
         @relation_rids.push({rid: @init_rid + 1, type: 'footer'})
+        @init_rid = @init_rid + 1
         @page_style = page_style
       end
       

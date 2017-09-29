@@ -6,6 +6,7 @@ module Rubyword
       
       def header(text)
         @relation_rids.push({rid: @init_rid + 1, type: 'header'})
+        @init_rid = @init_rid + 1
         @header_text = text
       end
     end
