@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require_relative 'base'
 require_relative 'text'
+require_relative 'header'
 require_relative 'footer'
 require_relative 'rels'
 
@@ -11,7 +12,7 @@ module Rubyword
       include Text
       include Rels
       include Footer
-
+      include Header
       attr_accessor :section_id, :style, :relation_rids, :init_rid
       
       def initialize(section_count, style = nil)

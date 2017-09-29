@@ -14,6 +14,7 @@ require_relative "writer/part/styles"
 require_relative "writer/part/theme"
 require_relative "writer/part/web_settings"
 require_relative "writer/part/footer"
+require_relative "writer/part/header"
 
 require_relative 'writer/style/base'
 require_relative 'writer/style/section'
@@ -24,6 +25,7 @@ module Rubyword
       filename = File.join(::Rubyword::TEMP_PATH, filename)
       buffer = Zip::OutputStream.write_buffer do |zio|
         # add header and footer
+        add_header_content(zio)
         add_footer_content(zio)
 
         # add normal content
@@ -37,8 +39,6 @@ module Rubyword
       file = File.new(filename,'wb')
       file.write(buffer.string)
       file.close
-    rescue => ex
-      puts "RubyWord Error: #{ex.message}"
     end
 
     def add_footer_content(zio)
@@ -49,6 +49,14 @@ module Rubyword
       zio.write(source)
     end
 
+    def add_header_content(zio)
+      elmFile = "word/header1.xml"
+      obj = Part::Header.new(@rubyword)
+      source = obj.write
+      zio.put_next_entry(elmFile)
+      zio.write(source)
+    end
+    
     def zip_files
       {
         'ContentTypes' => '[Content_Types].xml',

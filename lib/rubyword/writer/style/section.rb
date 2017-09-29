@@ -9,7 +9,7 @@ module Rubyword
             # footerReference
 
             section.relation_rids.each do |relation|
-              xml.send('w:footerReference', {
+              xml.send("w:#{relation[:type]}Reference", {
                 'w:type' => 'default',
                 'r:id' => "rId#{relation[:rid]}"
               })

@@ -1,3 +1,3 @@
-### Start
-gem install rubyzip
-gem install nokogiri
+### DEVELOPMENT DEPENDENCIES
++ gem install rubyzip
++ gem install nokogiri

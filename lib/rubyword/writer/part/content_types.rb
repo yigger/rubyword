@@ -19,13 +19,17 @@ module Rubyword
 						'/word/fontTable.xml' => "#{wordMLPrefix}.fontTable+xml"
 					}
 					
+					# if @rubyword.sections.select{|s| s.relation_rids.select{|r| r[:type] == 'header'}}
+					overrides.merge!('/word/header1.xml' => "#{wordMLPrefix}.header+xml")
+					# end
+
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Types(xmlns: 'http://schemas.openxmlformats.org/package/2006/content-types') do
 							xml.Default(Extension: 'rels', ContentType: "application/vnd.openxmlformats-package.relationships+xml")
 							xml.Default(Extension: 'xml', ContentType: 'application/xml')
 							xml.Default(Extension: 'jpg', ContentType: 'image/jpeg')
-							10.times.each do |time|
-								xml.Override(PartName: overrides.keys[time], ContentType: overrides.values[time])
+							overrides.each do |part_name, content_type|
+								xml.Override(PartName: part_name, ContentType: content_type)
 							end
 						end
 					end
