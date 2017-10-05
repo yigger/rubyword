@@ -11,7 +11,7 @@ module Rubyword
       include Text
       include Footer
       include Header
-
+      
       attr_accessor :section_id, :style, :relation_rids, :init_rid
       
       def initialize(section_count, style = nil)

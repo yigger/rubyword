@@ -2,6 +2,15 @@
 module Rubyword
   module Style
     class Section < Base
+
+      def align_style
+        {
+          center: 'center',
+          left: 'left',
+          right: 'right'
+        }.freeze
+      end
+
       def margins
         {
           'w:top' => margins_default[:margin],
@@ -34,6 +43,7 @@ module Rubyword
           column_spacing: 720
         }.freeze
       end
+      
     end
   end
 end

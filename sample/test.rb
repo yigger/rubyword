@@ -7,10 +7,15 @@ fontStyle = {
 rubyword = Rubyword::Document.new
 section = rubyword.addSection
 
+str = ''
+2.times.each do |a|
+  str = str + 'hello world'
+end
+
 section.generate{|sc|
-  sc.text "Hello World"
+  sc.text str
   sc.header 'haha'
-  sc.pagination 'number'
+  sc.pagination 'center'
 }
 
 rubyword.save('hello.docx')

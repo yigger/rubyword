@@ -18,12 +18,14 @@ module Rubyword
         def write
           builder = Nokogiri::XML::Builder.new do |xml|
             xml.send('w:ftr', ATTRIBUTE) {
-              # align center
-              xml.send('w:pPr') {
-                xml.send('w:jc', 'w:val' => 'center')
-              }
-
               xml.p {
+
+                if section.align_style
+                  xml.send('w:pPr') {
+                    xml.send('w:jc', 'w:val' => section.align_style)
+                  }
+                end
+
                 xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "begin"}) }
                 xml.send('w:r') { xml.send('w:instrText', {'w:space' => "preserve"}, 'PAGE') }
                 xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "separate"}) }
