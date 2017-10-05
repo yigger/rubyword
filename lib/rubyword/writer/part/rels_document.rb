@@ -22,7 +22,7 @@ module Rubyword
 							@rubyword.sections.each do |section|
 								next if section.relation_rids.find{ |r| ['header', 'footer'].include?(r[:type].to_s) }.nil?
 								section.relation_rids.each do |target|
-									xml.Relationship(Id: "rId#{target[:rid]}", Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer', Target: "#{target[:type].to_s}1.xml")
+									xml.Relationship(Id: "rId#{target[:rid]}", Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer', Target: "#{target[:type].to_s}#{section.section_id}.xml")
 								end
 							end
 						end

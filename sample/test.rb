@@ -18,6 +18,12 @@ section.generate{|sc|
   sc.pagination 'center'
 }
 
+section2 = rubyword.addSection
+section2.generate{|sc|
+  sc.text 'other'
+}
+
 rubyword.save('hello.docx')
-rubyword.save('hello.zip')
+# rubyword.save('hello.zip')
+
 

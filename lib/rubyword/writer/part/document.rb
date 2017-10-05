@@ -40,7 +40,7 @@ module Rubyword
               end
             end
 
-            if current_section == sections_count
+            if current_section != sections_count
               @object_blocks.push(Style::Section.new(section).write(xml))
             else
               # write_section(section)

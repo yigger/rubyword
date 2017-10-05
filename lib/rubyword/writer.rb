@@ -52,13 +52,32 @@ module Rubyword
       file = File.new(filename,'wb')
       file.write(buffer.string)
       file.close
+
+      if DEBUG
+        destination = File.join(::Rubyword::TEMP_PATH, 'unzip/')
+        extract_zip(filename, destination)
+      end
+    end
+
+    def extract_zip(file, destination)
+      FileUtils.mkdir_p(destination)
+    
+      Zip::File.open(file) do |zip_file|
+        zip_file.each do |f|
+          fpath = File.join(destination, f.name)
+          file = File.new(fpath,'wb')
+          content = f.get_input_stream.read
+          file.write(content)
+          file.close
+        end
+      end
     end
 
     def write_header_and_footer(zio)
       self.sections.each do |section|
         next if section.relation_rids.find{ |r| ['header', 'footer'].include?(r[:type].to_s) }.nil?
         section.relation_rids.each do |target|
-          elmFile = "word/#{target[:type].to_s}1.xml"
+          elmFile = "word/#{target[:type].to_s}#{section.section_id}.xml"
           obj = eval "Part::#{target[:type].to_s.capitalize}.new(self, section)"
           source = obj.write
           zio.put_next_entry(elmFile)

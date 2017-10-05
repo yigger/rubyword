@@ -19,9 +19,10 @@ module Rubyword
 						'/word/fontTable.xml' => "#{wordMLPrefix}.fontTable+xml"
 					}
 					
-					# if @rubyword.sections.select{|s| s.relation_rids.select{|r| r[:type] == 'header'}}
-					overrides.merge!('/word/header1.xml' => "#{wordMLPrefix}.header+xml")
-					# end
+					@rubyword.sections.each do |section|
+						next if section.relation_rids.find{ |r| ['header'].include?(r[:type].to_s) }.nil?
+						overrides.merge!("/word/header#{section.section_id}.xml" => "#{wordMLPrefix}.header+xml")
+					end
 
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Types(xmlns: 'http://schemas.openxmlformats.org/package/2006/content-types') do
