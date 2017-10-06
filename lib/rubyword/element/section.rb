@@ -12,13 +12,15 @@ module Rubyword
       include Footer
       include Header
       
-      attr_accessor :section_id, :style, :relation_rids, :init_rid, :texts
+      attr_accessor :section_id, :style, :relation_rids, :init_rid, :texts, :rubyword
       
-      def initialize(section_count, style = nil)
+      def initialize(section_count, style = nil, rubyword=nil)
         @section_id = section_count
         @style = Style::Section.new(style)
-        @init_rid = 6
-        @relation_rids, @texts = [], []
+        @texts = []
+        @rubyword = rubyword
+        @relation_rids = []
+        @init_rid = @rubyword.init_rid
         super()
       end
 

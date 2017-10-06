@@ -10,8 +10,8 @@ module Rubyword
 
       def pagination(align_style='center')
         @align_style = @style.align_style.keys.include?(align_style.to_sym) ? align_style : 'center'
-        @relation_rids.push({rid: @init_rid + 1, type: 'footer'})
-        @init_rid = @init_rid + 1
+        @relation_rids.push({rid: @rubyword.init_rid, type: 'footer'})
+        @rubyword.init_rid = @rubyword.init_rid + 1
       end
       
     end

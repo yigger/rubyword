@@ -25,6 +25,6 @@ section.pagination 'center'
 # }
 
 rubyword.save('hello.docx')
-# rubyword.save('hello.zip')
+rubyword.save('hello.zip')
 
 

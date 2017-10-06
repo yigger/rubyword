@@ -78,8 +78,9 @@ module Rubyword
 
     def write_header_and_footer(zio)
       self.sections.each do |section|
-        next if section.relation_rids.find{ |r| ['header', 'footer'].include?(r[:type].to_s) }.nil?
         section.relation_rids.each do |target|
+          next unless ['header', 'footer'].include?(target[:type].to_s)
+
           elmFile = "word/#{target[:type].to_s}#{section.section_id}.xml"
           obj = eval "Part::#{target[:type].to_s.capitalize}.new(self, section)"
           source = obj.write

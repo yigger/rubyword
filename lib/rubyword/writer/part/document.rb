@@ -49,6 +49,7 @@ module Rubyword
             @object_blocks.push(p_block)
           end
         end
+        
         @object_blocks
       end
       

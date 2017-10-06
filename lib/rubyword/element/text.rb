@@ -9,7 +9,9 @@ module Rubyword
 
       (1..4).each do |num|
         define_method "title_#{num}" do |args|
-          @texts.push(style: "title_#{num}", text: args.to_s)
+          @relation_rids.push({rid: @rubyword.init_rid, type: "title_#{num}"})
+          @texts.push(style: "title_#{num}", text: args.to_s, rid: @rubyword.init_rid)
+          @rubyword.init_rid = @rubyword.init_rid + 1
         end
       end
       

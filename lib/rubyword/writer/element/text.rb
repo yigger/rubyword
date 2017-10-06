@@ -28,11 +28,11 @@ module Rubyword
             @xml.send('w:pPr') {
               @xml.send('w:pStyle', 'w:val' => "Heading#{num}")
             }
-            @xml.send('bookmarkStart', 'w:id' => 1, 'w:name' => '_Toc1')
+            @xml.send('bookmarkStart', 'w:id' => args[:rid], 'w:name' => "_Toc#{args[:rid]}")
             @xml.send('w:r') {
               @xml.send('w:t', args[:text])
             }
-            @xml.send('bookmarkEnd', 'w:id' => 1)
+            @xml.send('bookmarkEnd', 'w:id' => args[:rid])
           end
         end
       end
