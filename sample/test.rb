@@ -8,16 +8,21 @@ str = ''
   str = str + 'hello world'
 end
 
+
 section.generate{|sc|
   sc.text str
-  sc.header 'zhbit'
-  sc.pagination 'center'
+  sc.title_1 'first title'
+  sc.title_2 'second title'
+  sc.text 'balabala'
 }
 
-section2 = rubyword.addSection
-section2.generate{|sc|
-  sc.text 'other'
-}
+section.header 'zhbit'
+section.pagination 'center'
+
+# section2 = rubyword.addSection
+# section2.generate{|sc|
+#   sc.text 'other'
+# }
 
 rubyword.save('hello.docx')
 # rubyword.save('hello.zip')

@@ -18,6 +18,9 @@ require_relative "writer/part/header"
 # style file
 require_relative 'writer/style/base'
 require_relative 'writer/style/section'
+# element
+require_relative 'writer/element/base'
+require_relative 'writer/element/text'
 
 module Rubyword
   module Writer
