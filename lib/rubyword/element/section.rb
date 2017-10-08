@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-require_relative 'base'
 require_relative 'text'
 require_relative 'header'
 require_relative 'footer'
 
 module Rubyword
   module Element
-    class Section < Base
+    class Section
       
       include Text
       include Footer

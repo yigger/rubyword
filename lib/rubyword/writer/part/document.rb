@@ -33,17 +33,18 @@ module Rubyword
         @rubyword.sections.each do |section|
           current_section = current_section + 1
 
-          # writer
-          block = Writer::Element::Text.new(self, section, xml).write
-          @object_blocks.push(block)
+          toc_block = Writer::Element::Toc.new(self, section, xml).write
+          # @object_blocks.push(toc_block)
+
+          text_block = Writer::Element::Text.new(self, section, xml).write
+          @object_blocks.push(text_block)
 
           if current_section == sections_count
-            @object_blocks.push(Style::Section.new(section).write(xml))
+            @object_blocks.push(Style::Section.new(section, xml).write)
           else
-            # w:p -> w:pPr
             p_block = xml.send('w:p') {
               xml.send('w:pPr') {
-                Style::Section.new(section).write(xml)
+                Style::Section.new(section, xml).write
               }
             }
             @object_blocks.push(p_block)

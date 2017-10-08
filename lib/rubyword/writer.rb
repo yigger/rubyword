@@ -21,6 +21,7 @@ require_relative 'writer/style/section'
 # element
 require_relative 'writer/element/base'
 require_relative 'writer/element/text'
+require_relative 'writer/element/toc'
 
 module Rubyword
   module Writer

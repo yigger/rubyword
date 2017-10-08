@@ -6,12 +6,9 @@ module Rubyword
       PUBLIC_METHOD = ['normal', 'title_1', 'title_2', 'title_3', 'title_4']
 
       def write
-        # @result = []
         @section.texts.each do |text|
-          # next unless PUBLIC_METHOD.include?(text[:style])
           eval "write_#{text[:style]}(text)"
         end
-        # @result
       end
 
       def write_normal(text)
