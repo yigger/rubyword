@@ -7,6 +7,7 @@ module Rubyword
           @xml.send('w:sectPr') {
             # header or footerReference
             section.relation_rids.each do |relation|
+              next unless ['header', 'footer'].include?(relation[:type])
               @xml.send("w:#{relation[:type]}Reference", {
                 'w:type' => 'default',
                 'r:id' => "rId#{relation[:rid]}"
