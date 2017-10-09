@@ -4,7 +4,7 @@ module Rubyword
     class Element::Toc < Element::Base
       
       def write
-        @section.texts.each do |text|
+        @section.e_text.texts.each do |text|
           next unless text[:style].include?('title') 
 
           rid = text[:rid]

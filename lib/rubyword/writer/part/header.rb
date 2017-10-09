@@ -19,11 +19,13 @@ module Rubyword
           builder = Nokogiri::XML::Builder.new do |xml|
             xml.send('w:hdr', ATTRIBUTE) {
               xml.p {
-                if section.header_style
+                
+                if @section
                   xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => section.header_style)
+                    xml.send('w:jc', 'w:val' => @section.header_style)
                   }
                 end
+
                 xml.send('w:r') { 
                   xml.send('w:t', {'xml:space' => "preserve"}, @section.header_text)
                 }

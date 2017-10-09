@@ -34,7 +34,7 @@ module Rubyword
           current_section = current_section + 1
 
           toc_block = Writer::Element::Toc.new(self, section, xml).write
-          # @object_blocks.push(toc_block)
+          @object_blocks.push(toc_block)
 
           text_block = Writer::Element::Text.new(self, section, xml).write
           @object_blocks.push(text_block)

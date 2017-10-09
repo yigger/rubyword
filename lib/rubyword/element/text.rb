@@ -1,7 +1,18 @@
 # -*- encoding : utf-8 -*-
 module Rubyword
   module Element
-    module Text
+    class Text < Base
+
+      attr_accessor :texts
+
+      def write_object(*args)
+        @texts ||= []
+        @str = args[0]
+        @style = args[1]
+        return if @str.nil?
+
+        self.send(@style.nil? ? :text : @style.to_sym, @str)
+      end
 
       def text(text)
         @texts.push(style: 'normal', text: text.to_s)
@@ -14,7 +25,7 @@ module Rubyword
           @rubyword.init_rid = @rubyword.init_rid + 1
         end
       end
-      
+
     end
   end
 end

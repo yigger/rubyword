@@ -45,7 +45,9 @@ module Rubyword
     def save(filename = 'test.docx')
       filename = File.join(::Rubyword::TEMP_PATH, filename)
       buffer = Zip::OutputStream.write_buffer do |zio|
+
         write_header_and_footer(zio)
+
         DOCUMENT_BASE_FILES.each do |helper_method, entry|
           obj = eval "Part::#{helper_method}.new(self)"
           source = obj.write
@@ -83,7 +85,7 @@ module Rubyword
           next unless ['header', 'footer'].include?(target[:type].to_s)
 
           elmFile = "word/#{target[:type].to_s}#{section.section_id}.xml"
-          obj = eval "Part::#{target[:type].to_s.capitalize}.new(self, section)"
+          obj = eval "Part::#{target[:type].to_s.capitalize}.new(self, section.e_#{target[:type]})"
           source = obj.write
           zio.put_next_entry(elmFile)
           zio.write(source)

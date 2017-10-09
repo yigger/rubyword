@@ -20,9 +20,9 @@ module Rubyword
             xml.send('w:ftr', ATTRIBUTE) {
               xml.p {
 
-                if section.align_style
+                if @section && @section.align_style
                   xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => section.align_style)
+                    xml.send('w:jc', 'w:val' => @section.align_style)
                   }
                 end
 
