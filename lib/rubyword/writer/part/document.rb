@@ -30,13 +30,15 @@ module Rubyword
         @object_blocks = []
         sections_count = @rubyword.sections.count
         current_section = 0
+
+        # write TOC
+        toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
+        @object_blocks.push(toc_block)
+
         @rubyword.sections.each do |section|
           current_section = current_section + 1
 
-          toc_block = Writer::Element::Toc.new(self, section, xml).write
-          @object_blocks.push(toc_block)
-
-          text_block = Writer::Element::Text.new(self, section, xml).write
+          text_block = Writer::Element::Text.new(@rubyword, section, xml).write
           @object_blocks.push(text_block)
 
           if current_section == sections_count
