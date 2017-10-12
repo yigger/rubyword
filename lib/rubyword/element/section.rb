@@ -27,7 +27,6 @@ module Rubyword
       def method_missing(method, *args)
         method = method.to_s
         if EXIST_METHODS.include?(method)
-          @object_name = "@e_#{method}"
           eval "@e_#{method} = #{method.capitalize}.new(@rubyword, @relation_rids) if @e_#{method}.nil?"
           eval "@e_#{method}.write_object(*args)"
         else
