@@ -20,8 +20,11 @@ module Rubyword
 					}
 					
 					@rubyword.sections.each do |section|
-						next if section.relation_rids.find{ |r| ['header'].include?(r[:type].to_s) }.nil?
-						overrides.merge!("/word/header#{section.section_id}.xml" => "#{wordMLPrefix}.header+xml")
+						next unless section.relation_rids
+						section.relation_rids.each do |target|
+							next unless ['header', 'footer'].include?(target[:type].to_s)
+							overrides.merge!("/word/#{target[:type].to_s}#{section.section_id}.xml" => "#{wordMLPrefix}.#{target[:type].to_s}+xml")
+						end
 					end
 
 					builder = Nokogiri::XML::Builder.new do |xml|

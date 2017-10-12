@@ -20,9 +20,10 @@ module Rubyword
 							end
 
 							@rubyword.sections.each do |section|
-								next if section.relation_rids.find{ |r| ['header', 'footer'].include?(r[:type].to_s) }.nil?
+								next unless section.relation_rids
 								section.relation_rids.each do |target|
-									xml.Relationship(Id: "rId#{target[:rid]}", Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer', Target: "#{target[:type].to_s}#{section.section_id}.xml")
+									next unless ['header', 'footer'].include?(target[:type].to_s)
+									xml.Relationship(Id: "rId#{target[:rid]}", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/#{target[:type].to_s}", Target: "#{target[:type].to_s}#{section.section_id}.xml")
 								end
 							end
 						end

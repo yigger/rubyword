@@ -17,7 +17,7 @@ section.generate{|sc|
   # sc.text 'balabala'
 }
 
-section.header 'zhbit'
+# section.header 'zhbit'
 section.footer 'center'
 
 # section2 = rubyword.addSection
@@ -26,6 +26,6 @@ section.footer 'center'
 # }
 
 rubyword.save('hello.docx')
-# rubyword.save('hello.zip')
+rubyword.save('hello.zip')
 
 
