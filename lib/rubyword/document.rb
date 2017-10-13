@@ -16,7 +16,7 @@ module Rubyword
 
     def initialize(options={}, &block)
       @sections = []
-      @init_rid = 6
+      @init_rid = 7
       @toc = false
       
       instance_eval(&block) if block_given?
@@ -30,22 +30,35 @@ module Rubyword
 
     def section(&block)
       @section = Element::Section.new(@sections.count + 1, nil, self)
-      @section.generate(&block) if block_given?
+      self.sections.push(@section)
+      @section.instance_eval(&block) if block_given?
     end
 
-    def toc(switch=false)
+    def open_toc(switch=false)
       @toc = switch
     end
 
-    def header(text)
-      @header = text
+    def add_header(text, options={})
+      @header = {
+        id: 1,
+        text: text,
+        rid: self.init_rid,
+        text_align: options[:align] || 'center',
+        type: 'header'
+      }
+      self.init_rid = self.init_rid + 1
     end
 
-    def footer(text, align='center')
+    def add_footer(text, options={})
       @footer = {
+        id: 1,
         text: text,
-        align: align
+        rid: self.init_rid,
+        text_align: options[:align] || 'center',
+        nums_type: options[:nums_type],
+        type: 'footer'
       }
+      self.init_rid = self.init_rid + 1
     end
 
   end

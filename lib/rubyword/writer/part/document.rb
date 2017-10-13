@@ -32,8 +32,10 @@ module Rubyword
         current_section = 0
 
         # write TOC
-        toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
-        @object_blocks.push(toc_block)
+        if @rubyword.toc
+          toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
+          @object_blocks.push(toc_block)
+        end
 
         @rubyword.sections.each do |section|
           current_section = current_section + 1
@@ -42,11 +44,11 @@ module Rubyword
           @object_blocks.push(text_block)
 
           if current_section == sections_count
-            @object_blocks.push(Style::Section.new(section, xml).write)
+            @object_blocks.push(Style::Section.new(section, xml, @rubyword).write)
           else
             p_block = xml.send('w:p') {
               xml.send('w:pPr') {
-                Style::Section.new(section, xml).write
+                Style::Section.new(section, xml, @rubyword).write
               }
             }
             @object_blocks.push(p_block)

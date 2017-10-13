@@ -6,11 +6,12 @@ module Rubyword
         def write
           @xml.send('w:sectPr') {
             # header or footerReference
-            section.relation_rids.each do |relation|
-              next unless ['header', 'footer'].include?(relation[:type])
-              @xml.send("w:#{relation[:type]}Reference", {
+
+            [@rubyword.header, @rubyword.footer].each do |target|
+              next if target.nil?
+              @xml.send("w:#{target[:type]}Reference", {
                 'w:type' => 'default',
-                'r:id' => "rId#{relation[:rid]}"
+                'r:id' => "rId#{target[:rid]}"
               })
             end
             

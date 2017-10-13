@@ -16,18 +16,24 @@ module Rubyword
         }
 
         def write
+          text_align = @rubyword.footer[:text_align]
+          if @rubyword.footer[:nums_type].to_s.downcase == 'roman'
+            text = 'PAGE \* ROMAN'
+          else
+            text = 'PAGE'
+          end
+          text = @rubyword.footer[:text] unless @rubyword.footer[:text].nil?
           builder = Nokogiri::XML::Builder.new do |xml|
             xml.send('w:ftr', ATTRIBUTE) {
               xml.p {
-
-                if @section && @section.align_style
+                if text_align
                   xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => @section.align_style)
+                    xml.send('w:jc', 'w:val' => text_align)
                   }
                 end
-
+                
                 xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "begin"}) }
-                xml.send('w:r') { xml.send('w:instrText', {'w:space' => "preserve"}, 'PAGE') }
+                xml.send('w:r') { xml.send('w:instrText', {'w:space' => "preserve"}, text) }
                 xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "separate"}) }
                 xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "end"}) }
               }

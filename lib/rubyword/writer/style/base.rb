@@ -3,11 +3,12 @@ module Rubyword
   module Writer
     module Style
       class Base
-        attr_accessor :style, :section, :xml
-        def initialize(section, xml)
+        attr_accessor :rubyword, :style, :section, :xml
+        def initialize(section, xml, rubyword)
           @style = section.style
           @section = section
           @xml = xml
+          @rubyword = rubyword
         end
       end
     end

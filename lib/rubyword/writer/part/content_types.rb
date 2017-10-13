@@ -18,14 +18,11 @@ module Rubyword
 						'/word/webSettings.xml' => "#{wordMLPrefix}.webSettings+xml",
 						'/word/fontTable.xml' => "#{wordMLPrefix}.fontTable+xml"
 					}
-					
-					@rubyword.sections.each do |section|
-						next unless section.relation_rids
-						section.relation_rids.each do |target|
-							next unless ['header', 'footer'].include?(target[:type].to_s)
-							overrides.merge!("/word/#{target[:type].to_s}#{section.section_id}.xml" => "#{wordMLPrefix}.#{target[:type].to_s}+xml")
-						end
-					end
+          
+          [@rubyword.header, @rubyword.footer].each do |target|
+            next if target.nil?
+            overrides.merge!("/word/#{target[:type].to_s}#{target[:id]}.xml" => "#{wordMLPrefix}.#{target[:type].to_s}+xml")
+          end
 
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Types(xmlns: 'http://schemas.openxmlformats.org/package/2006/content-types') do

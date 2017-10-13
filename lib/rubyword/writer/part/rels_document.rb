@@ -18,14 +18,10 @@ module Rubyword
 								id_num = num + 1
 								xml.Relationship(Id: "rId#{id_num}", Type: xmlRels.values[num], Target: xmlRels.keys[num])
 							end
-
-							@rubyword.sections.each do |section|
-								next unless section.relation_rids
-								section.relation_rids.each do |target|
-									next unless ['header', 'footer'].include?(target[:type].to_s)
-									xml.Relationship(Id: "rId#{target[:rid]}", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/#{target[:type].to_s}", Target: "#{target[:type].to_s}#{section.section_id}.xml")
-								end
-							end
+              [@rubyword.header, @rubyword.footer].each do |target|
+                next if target.nil?
+                xml.Relationship(Id: "rId#{target[:rid]}", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/#{target[:type].to_s}", Target: "#{target[:type].to_s}#{target[:id]}.xml")
+              end
 						end
 					end
 					builder.to_xml
