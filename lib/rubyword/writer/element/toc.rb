@@ -30,9 +30,9 @@ module Rubyword
                 }
     
                 @xml.send('w:r') {
-                  @xml.send('w:instrText', {'xml:space' => 'preserve'}, "TOC \\o 1-13 \\h \\z \\u") # What does '1-13' mean?
+                  @xml.send('w:instrText', {'xml:space' => 'preserve'}, "TOC \\o 1-10 \\h \\z \\u") # What does '1-13' mean?
                 }
-                
+
                 @xml.send('w:r') {
                   @xml.send('w:fldChar', 'w:fldCharType' => 'separate')
                 }
@@ -62,7 +62,12 @@ module Rubyword
                 @xml.send('w:r') {
                   @xml.send('w:instrText', {'xml:space' => 'preserve'}, "PAGEREF _Toc#{rid} \\h")
                 }
-  
+
+                # page numbers
+                # @xml.send('w:r') {
+                #   @xml.send('w:t', 1)
+                # }
+
                 @xml.send('w:r') {
                   @xml.send('w:fldChar', 'w:fldCharType' => 'end')
                 }
