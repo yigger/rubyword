@@ -63,6 +63,7 @@ module Rubyword
       end
     end
 
+    # debug function
     def extract_zip(file, destination)
       FileUtils.mkdir_p(destination)
     

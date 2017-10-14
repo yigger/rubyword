@@ -8,7 +8,7 @@ module Rubyword
       def write
         if @section.e_text
           @section.e_text.texts.each do |text|
-            eval "write_#{text[:style]}(text)"
+            eval "write_#{text[:size]}(text)"
           end
         end
       end

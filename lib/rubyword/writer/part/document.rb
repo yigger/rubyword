@@ -32,10 +32,8 @@ module Rubyword
         current_section = 0
 
         # write TOC
-        if @rubyword.toc
-          toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
-          @object_blocks.push(toc_block)
-        end
+        toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
+        @object_blocks.push(toc_block) if toc_block
 
         @rubyword.sections.each do |section|
           current_section = current_section + 1

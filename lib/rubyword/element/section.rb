@@ -20,14 +20,15 @@ module Rubyword
         !block.nil? && block.arity < 1 ? instance_eval(&block) : block[self]
       end
 
-      def method_missing(method, *args)
-        if method.to_s == 'text'
-          @e_text ||= Text.new(@rubyword, @relation_rids)
-          @e_text.write_object(*args)
-        else
-          super()
-        end
-      end
+			def text(text, style=nil)
+				@e_text ||= Text.new(@rubyword, @relation_rids)
+				call_method_name = __callee__.to_s
+				@e_text.write_object(text, call_method_name, style)
+			end
+			alias :title_1 :text
+			alias :title_2 :text
+			alias :title_3 :text
+			alias :title_4 :text
 
     end
   end
