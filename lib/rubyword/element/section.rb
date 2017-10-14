@@ -10,8 +10,8 @@ module Rubyword
       attr_accessor :e_text
 
       def initialize(section_count, style = nil, rubyword=nil)
-        @section_id = section_count
-        @style = Style::Section.new(style)
+				@section_id = section_count
+				@style = style
         @rubyword = rubyword
         @relation_rids = []
       end

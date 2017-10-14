@@ -26,7 +26,7 @@ require_relative 'writer/element/toc'
 module Rubyword
   module Writer
     # word base file
-    DOCUMENT_BASE_FILES = {
+    DocumentBaseFile = {
       'ContentTypes' => '[Content_Types].xml',
       'Rels' => '_rels/.rels',
       'DocPropsApp' => 'docProps/app.xml',
@@ -42,11 +42,11 @@ module Rubyword
       'Theme' => 'word/theme/theme1.xml'
     }.freeze
 
-    def save(filename = 'test.docx')
-      filename = File.join(::Rubyword::TEMP_PATH, filename)
+    def save(filename = 'document.docx')
+      filename = File.join(::Rubyword::TEMP_PATH, filename) if DEBUG
       buffer = Zip::OutputStream.write_buffer do |zio|
         write_header_and_footer(zio)
-        DOCUMENT_BASE_FILES.each do |helper_method, entry|
+        DocumentBaseFile.each do |helper_method, entry|
           obj = eval "Part::#{helper_method}.new(self)"
           source = obj.write
           zio.put_next_entry(entry)

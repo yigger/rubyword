@@ -14,9 +14,9 @@ module Rubyword
 					}
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Relationships(xmlns: 'http://schemas.openxmlformats.org/package/2006/relationships') do
-							RELS_RID.times.each do |num|
-								id_num = num + 1
-								xml.Relationship(Id: "rId#{id_num}", Type: xmlRels.values[num], Target: xmlRels.keys[num])
+							xmlRels.keys.each_with_index do |rel_name, index|
+								id = index + 1
+								xml.Relationship(Id: "rId#{id}", Type: xmlRels[rel_name], Target: rel_name)
 							end
               [@rubyword.header, @rubyword.footer].each do |target|
                 next if target.nil?

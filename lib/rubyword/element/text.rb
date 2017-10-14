@@ -3,7 +3,7 @@ module Rubyword
   module Element
     class Text < Base
       attr_accessor :texts, :titles
-      INDENT_SIZE = 200
+      IndentSize = 200
 
       def write_object(text, type, style)
         @texts ||= []
@@ -17,20 +17,20 @@ module Rubyword
       end
 
       def text(text, style)
-        # TODO: style write, the same as title_1..4
-        @texts << { size: 'normal', text: text.to_s }
+        @texts << { size: 'normal', text: text.to_s, style: style }
       end
 
       (1..4).each do |num|
         define_method "title_#{num}" do |text, style|
           @relation_rids.push({rid: @rubyword.init_rid, type: "title_#{num}"})
           title_hs = {
-            indent: (num - 1) * INDENT_SIZE,
+            indent: (num - 1) * IndentSize,
             size: "title_#{num}",
             text: text.to_s,
-            rid: @rubyword.init_rid
+            rid: @rubyword.init_rid,
+            style: style
           }
-          @titles << title_hs
+          @titles << title_hs if (style && !style[:ignore_dir]) || style.nil?
           @texts << title_hs
           @rubyword.init_rid = @rubyword.init_rid + 1
         end

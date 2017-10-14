@@ -3,6 +3,31 @@ module Rubyword
   module Writer
     module Style
       class Section < Base
+
+        MarginsDefault = {
+          width: 11870, 
+          height: 16787,
+          margin: 1440,
+          gutter: 0,
+          header_height: 720,
+          footer_height: 720,
+          column_count: 1,
+          column_spacing: 720
+        }.freeze
+
+        Margins = {
+          'w:top' => MarginsDefault[:margin],
+          'w:right' => MarginsDefault[:margin],
+          'w:bottom' => MarginsDefault[:margin],
+          'w:left' => MarginsDefault[:margin],
+          'w:header' => MarginsDefault[:header_height],
+          'w:footer' => MarginsDefault[:footer_height],
+          'w:gutter' => MarginsDefault[:gutter]
+        }
+        
+        Orientation = 'portrait'.freeze
+        Landspace = 'landscape'.freeze
+
         def write
           @xml.send('w:sectPr') {
             # header or footerReference
@@ -17,16 +42,16 @@ module Rubyword
             
             # pgsize
             @xml.send('w:pgSz', {
-              'w:orient' => @style.orientation,
-              'w:w' => @style.margins_default[:width],
-              'w:h' => @style.margins_default[:height]
+              'w:orient' => Orientation,
+              'w:w' => MarginsDefault[:width],
+              'w:h' => MarginsDefault[:height]
             })
             #borders 暂无
 
             # pgMar
-            @xml.send('w:pgMar', @style.margins)
+            @xml.send('w:pgMar', Margins)
             # cols
-            @xml.send('w:cols', 'w:num' => @style.margins_default[:column_count], 'w:space' => @style.margins_default[:column_spacing])
+            @xml.send('w:cols', 'w:num' => MarginsDefault[:column_count], 'w:space' => MarginsDefault[:column_spacing])
             #Page numbering start 暂无
 
             # Line numbering 暂无
