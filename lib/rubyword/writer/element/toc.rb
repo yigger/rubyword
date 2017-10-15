@@ -7,6 +7,7 @@ module Rubyword
         return if @rubyword.toc.nil? || !@rubyword.toc[:open]
 
         @rubyword.sections.each_with_index do |section, section_index|
+          next unless section.e_text
           section.e_text.titles.each_with_index do |title, title_index|
             rid = title[:rid]
             indent = 0

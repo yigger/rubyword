@@ -18,7 +18,7 @@ module Rubyword
         builder = Nokogiri::XML::Builder.new do |xml|
           xml.send('w:document', DOCUMENT_ATTR) {
             xml.send('w:body') {
-              section_write(xml).each{|x| x}
+              section_write(xml)
             }
           }
         end
@@ -38,18 +38,20 @@ module Rubyword
         @rubyword.sections.each do |section|
           current_section = current_section + 1
 
-          text_block = Writer::Element::Text.new(@rubyword, section, xml).write
-          @object_blocks.push(text_block)
+          # 遍历输出各对象 object 信息
+          section.section_objects.each do |object|
+            @object_blocks << eval("Writer::Element::#{object.capitalize}.new(@rubyword, section, xml).write")
+          end
 
           if current_section == sections_count
-            @object_blocks.push(Style::Section.new(section, xml, @rubyword).write)
+            @object_blocks << Style::Section.new(section, xml, @rubyword).write
           else
             p_block = xml.send('w:p') {
               xml.send('w:pPr') {
                 Style::Section.new(section, xml, @rubyword).write
               }
             }
-            @object_blocks.push(p_block)
+            @object_blocks << p_block
           end
         end
         

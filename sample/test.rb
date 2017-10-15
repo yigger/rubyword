@@ -20,7 +20,8 @@ Rubyword::Document::generate('hello.docx') {
     # title_1 '数据库'
     # title_2 'MySQL'
     # title_2 'NoSQL'
-
+    
+     text 'hello word', bgcolor: 'yellow', text_align: 'center'
      text 'hello word', bgcolor: 'yellow', text_align: 'center'
     # text 'hello word', indent_between: '1440-1440'
     # text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }

@@ -23,8 +23,8 @@ or add these to Gemfile
 + Support for inserte blank lines and blank lines between pages and pages (developing)
 + Support for inserte multiple images (developing)
 + Support for inserte multiple lists (developing)
-+ Support insert chart (developing)
-+ Support insert a label (developing)
++ Support for insert chart (developing)
++ Support for insert link (developing)
 + A lot of features to be continue
 
 # Usage
