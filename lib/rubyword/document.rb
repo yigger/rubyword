@@ -5,6 +5,7 @@ module Rubyword
   class Document
     attr_accessor :sections, :init_rid
     attr_accessor :toc, :header, :footer
+    attr_accessor :doc_info
     include Writer
 
     def self.generate(filename, options = {}, &block)
@@ -13,7 +14,7 @@ module Rubyword
     end
 
     def initialize(options={}, &block)
-      @sections, @toc, @init_rid = [], {}, 7
+      @sections, @toc, @init_rid, @doc_info = [], {}, 7, {}
       instance_eval(&block) if block_given?
     end
 
@@ -51,6 +52,9 @@ module Rubyword
       self.init_rid = self.init_rid + 1
     end
 
+    def information(options={})
+      @doc_info = options
+    end
+
   end
-  
 end

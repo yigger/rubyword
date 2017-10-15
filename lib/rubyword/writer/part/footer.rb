@@ -16,26 +16,28 @@ module Rubyword
         }
 
         def write
-          text_align = @rubyword.footer[:text_align]
-          if @rubyword.footer[:nums_type].to_s.downcase == 'roman'
-            text = 'PAGE \* ROMAN'
-          else
-            text = 'PAGE'
-          end
-          text = @rubyword.footer[:text] unless @rubyword.footer[:text].nil?
+          footer = @rubyword.footer
           builder = Nokogiri::XML::Builder.new do |xml|
             xml.send('w:ftr', ATTRIBUTE) {
               xml.p {
-                if text_align
+                if footer[:text_align]
                   xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => text_align)
+                    xml.send('w:jc', 'w:val' => footer[:text_align])
                   }
                 end
                 
-                xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "begin"}) }
-                xml.send('w:r') { xml.send('w:instrText', {'w:space' => "preserve"}, text) }
-                xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "separate"}) }
-                xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "end"}) }
+                nums_type = footer[:nums_type].to_s.downcase
+                if footer[:text].nil? || nums_type == 'roman' || nums_type == 'number'
+                  text = 'PAGE'
+                  text = 'PAGE \* ROMAN' if nums_type == 'roman'
+                  xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "begin"}) }
+                  xml.send('w:r') { xml.send('w:instrText', {'w:space' => "preserve"}, text) }
+                  xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "separate"}) }
+                  xml.send('w:r') { xml.send('w:fldChar', {'w:fldCharType' => "end"}) }
+                else
+                  text = footer[:text]
+                  xml.send('w:r') { xml.send('w:t', {'w:space' => "preserve"}, text) }
+                end
               }
             }
           end

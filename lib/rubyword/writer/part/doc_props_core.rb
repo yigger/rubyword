@@ -10,18 +10,18 @@ module Rubyword
 						'xmlns:dcterms' => 'http://purl.org/dc/terms/',
 						'xmlns:dcmitype' => 'http://purl.org/dc/dcmitype/',
 						'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
-					}
+          }
+          infomartion = @rubyword.doc_info
 					builder = Nokogiri::XML::Builder.new do |xml|
-						xml.send('cp:coreProperties', xmlns) do
-							xml.send('dc:creator', '')
-							xml.send('dc:title', '')
-							xml.send('dc:description', '')
-							xml.send('dc:subject', '')
-							xml.send('cp:keywords', '')
-							xml.send('cp:category', '')
-							xml.send('cp:lastModifiedBy', '')
-							xml.send('dcterms:created', {'xsi:type' => 'dcterms:W3CDTF'}, '2017-08-29T09:48:45+00:00')
-							xml.send('dcterms:modified', {'xsi:type' => 'dcterms:W3CDTF'}, '2017-08-29T09:48:45+00:00')
+            xml.send('cp:coreProperties', xmlns) do
+              xml.send('dc:title', infomartion[:title])
+              xml.send('dc:subject', infomartion[:subject])
+							xml.send('dc:creator', infomartion[:creator])
+              xml.send('cp:keywords', infomartion[:keywords])
+							xml.send('dc:description', infomartion[:description])
+							xml.send('cp:lastModifiedBy', 'rubyword')
+              xml.send('cp:category', infomartion[:category])
+							xml.send('dcterms:created', {'xsi:type' => 'dcterms:W3CDTF'}, Time.now.strftime('%Y-%m-%dT%H:%M:%SZ').to_s)
 						end
 					end
 					builder.to_xml

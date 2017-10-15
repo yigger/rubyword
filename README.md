@@ -14,7 +14,7 @@ or add these to Gemfile
   ...
 ```
 # Features
-+ 支持设置文档的属性，比如：标题，主题，作者等信息(未完成)
++ 支持设置文档的属性，比如：标题，主题，作者等信息
 + 支持创建多个块，且每个块都拥有自己的样式属性
 + 支持设置全局样式，比如：默认字体大小，字体属性以及默认段落样式等
 + 支持通过标题生成目录结构的文档
@@ -25,13 +25,24 @@ or add these to Gemfile
 + 支持插入多个列表(未完成)
 + 支持插入表格(未完成)
 + 支持插入 a 标签(未完成)
-+ 更多功能敬请期待，希望各位多提 Issue 来帮助我完善功能
++ 更多功能敬请期待...
 
 # Usage
 ```
   require "rubyword"
 
   Rubyword::Document::generate('hello.docx') {
+    # write the doc infomation
+    information({
+      company: 'ruby word',
+      creator: 'young',
+      title: 'example word file',
+      description: 'this is a example docx',
+      subject: 'how to create doc info',
+      keywords: 'remark',
+      category: 'category'
+    })
+    
     # Generate the directory structure
     title_directory font_size: 24
 

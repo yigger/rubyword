@@ -1,9 +1,17 @@
 require_relative '../lib/rubyword'
 
 Rubyword::Document::generate('hello.docx') {
+
+  information({
+    company: 'ruby word',
+    creator: 'young',
+    title: 'example word file',
+    description: 'this is a example docx'
+  })
+
   title_directory font_size: 24
   add_header 'zhbit'
-  add_footer nil, text_align: 'center'
+  add_footer nil, text_align: 'center', nums_type: 'number'
   
   section {
     
