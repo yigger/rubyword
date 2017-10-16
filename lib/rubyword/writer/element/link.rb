@@ -6,17 +6,16 @@ module Rubyword
         
         def write
           return nil unless @section.e_link
-          links = @section.e_link.links
-          # link.each do |link|
-          #   @xml.send('w:p') {
-          #     @xml.send('hyperlink', 'r:id' => '', 'w:history' => '1') {
-          #       @xml.send('w:r') {
-          #         @xml.send('w:rPr')
-          #         @xml.send('w:t', 'xml:space' => 'preserve', link[:text])
-          #       }
-          #     }
-          #   }
-          # end
+          link = @section.e_link.links.pop
+          @xml.send('w:p') {
+            @xml.send('hyperlink', 'r:id' => "rId#{link[:rId]}", 'w:history' => '1') {
+              @xml.send('w:r') {
+                # TODO: add style
+                @xml.send('w:rPr')
+                @xml.send('w:t', {'xml:space' => 'preserve'}, link[:text])
+              }
+            }
+          }
 
         end
         

@@ -46,10 +46,10 @@ module Rubyword
         @section_objects << __method__.to_s
       end
 
-      def link(text, style=nil)
+      def link(text, link, style=nil)
         @e_link ||= Link.new(@rubyword, @relation_rids)
-        @e_link.write_object(text, style)
-        # @section_objects << __method__.to_s
+        @e_link.write_object(text, link, style)
+        @section_objects << __method__.to_s
       end
 
     end

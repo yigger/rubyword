@@ -6,7 +6,7 @@ module Rubyword
       IndentSize = 200
 
       def write_object(text, type, style)
-        @texts ||= []
+        @texts ||= Queue.new
         @titles ||= []
         return if text.nil?
         if type == 'text'
@@ -22,7 +22,7 @@ module Rubyword
 
       (1..4).each do |num|
         define_method "title_#{num}" do |text, style|
-          @relation_rids << {rid: @rubyword.init_rid, type: "title_#{num}"}
+          @rubyword.relation_rids << {rid: @rubyword.init_rid, type: "title_#{num}"}
           title_hs = {
             indent: (num - 1) * IndentSize,
             size: "title_#{num}",

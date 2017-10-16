@@ -8,7 +8,6 @@ module Rubyword
       def initialize(rubyword, relation_rids=nil)
         @rubyword = rubyword
         @init_rid = @rubyword.init_rid
-        @relation_rids = @rubyword.relation_rids
       end
 
     end

@@ -24,7 +24,7 @@ or add these to Gemfile
 + Support for inserte multiple images (developing)
 + Support for inserte multiple lists (developing)
 + Support for insert chart (developing)
-+ Support for insert link (developing)
++ Support for insert link 
 + A lot of features to be continue
 
 # Usage
@@ -52,6 +52,9 @@ or add these to Gemfile
     # insert footer
     add_footer 'number', text_align: 'center'
     
+    # add a link
+    link 'baidu', 'http://www.baidu.com', text_align: 'center'
+
     # initialize section and insert something in the section
     section {
       # insert title

@@ -2,15 +2,15 @@ require_relative '../lib/rubyword'
 filename = File.join(Rubyword::TEMP_PATH, 'hello.docx')
 Rubyword::Document::generate(filename) {
 
-  information({
-    company: 'ruby word',
-    creator: 'young',
-    title: 'example word file',
-    description: 'this is a example docx'
-  })
+  # information({
+  #   company: 'ruby word',
+  #   creator: 'young',
+  #   title: 'example word file',
+  #   description: 'this is a example docx'
+  # })
 
   title_directory font_size: 24
-  add_header 'zhbit'
+  # add_header 'zhbit'
   # add_footer nil, text_align: 'center', nums_type: 'number'
   
   section {
@@ -21,10 +21,12 @@ Rubyword::Document::generate(filename) {
     # title_2 'MySQL'
     # title_2 'NoSQL'
     
-     text 'hello word', bgcolor: 'yellow', text_align: 'center'
-    #  text 'hello word', bgcolor: 'yellow', text_align: 'center'
-    #  link 'http://www.baidu.com', text_align: 'center'
-    # text 'hello word', indent_between: '1440-1440'
+    text 'hello word123'
+    title_1 'section2 title'
+    link '哈哈', 'http://www.baidu.com', text_align: 'center'
+    text 'hello word3'
+    link 'baidu', 'http://www.baidu.com', text_align: 'center'
+    # text 'hello word1', indent_between: '1440-1440'
     # text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
     # title_1 'section2 title'
 
