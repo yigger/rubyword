@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 require_relative 'base'
 require_relative 'text'
+require_relative 'link'
 
 module Rubyword
   module Element
     class Section
             
-      attr_accessor :section_id, :style, :rubyword, :relation_rids, :section_objects
-      attr_accessor :e_text, :e_list
+      attr_accessor :section_id, :style, :rubyword, :section_objects
+      attr_accessor :e_text, :e_list, :e_link
 
       def initialize(section_count, style = nil, rubyword=nil)
 				@section_id = section_count
 				@style = style
         @rubyword = rubyword
-        @relation_rids = []
         @section_objects = []
       end
 
@@ -22,7 +22,7 @@ module Rubyword
       end
 
 			def text(text, style=nil)
-        @e_text ||= Text.new(@rubyword, @relation_rids)
+        @e_text ||= Text.new(@rubyword)
         @section_objects << __method__.to_s
 				call_method_name = __callee__.to_s
 				@e_text.write_object(text, call_method_name, style)
@@ -33,7 +33,7 @@ module Rubyword
 			alias :title_4 :text
 
       def list
-        @e_list ||= List.new(@rubyword, @relation_rids)
+        @e_list ||= List.new(@rubyword)
         # @section_objects << __method__.to_s
         @e_list.write_object(text, style)
       end
@@ -46,8 +46,10 @@ module Rubyword
         @section_objects << __method__.to_s
       end
 
-      def link
-        @section_objects << __method__.to_s
+      def link(text, style=nil)
+        @e_link ||= Link.new(@rubyword, @relation_rids)
+        @e_link.write_object(text, style)
+        # @section_objects << __method__.to_s
       end
 
     end

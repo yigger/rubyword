@@ -18,10 +18,9 @@ module Rubyword
 								id = index + 1
 								xml.Relationship(Id: "rId#{id}", Type: xmlRels[rel_name], Target: rel_name)
 							end
-              [@rubyword.header, @rubyword.footer].each do |target|
-                next if target.nil?
-                xml.Relationship(Id: "rId#{target[:rid]}", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/#{target[:type].to_s}", Target: "#{target[:type].to_s}#{target[:id]}.xml")
-              end
+							@rubyword.rels_documents.each do |attribute|
+								xml.Relationship(attribute)
+							end
 						end
 					end
 					builder.to_xml

@@ -25,7 +25,6 @@ module Rubyword
         builder.to_xml
       end
 
-
       def section_write(xml)
         @object_blocks = []
         sections_count = @rubyword.sections.count
@@ -37,12 +36,10 @@ module Rubyword
 
         @rubyword.sections.each do |section|
           current_section = current_section + 1
-
           # 遍历输出各对象 object 信息
           section.section_objects.each do |object|
             @object_blocks << eval("Writer::Element::#{object.capitalize}.new(@rubyword, section, xml).write")
           end
-
           if current_section == sections_count
             @object_blocks << Style::Section.new(section, xml, @rubyword).write
           else
@@ -54,7 +51,6 @@ module Rubyword
             @object_blocks << p_block
           end
         end
-        
         @object_blocks
       end
       

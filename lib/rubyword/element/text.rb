@@ -22,7 +22,7 @@ module Rubyword
 
       (1..4).each do |num|
         define_method "title_#{num}" do |text, style|
-          @relation_rids.push({rid: @rubyword.init_rid, type: "title_#{num}"})
+          @relation_rids << {rid: @rubyword.init_rid, type: "title_#{num}"}
           title_hs = {
             indent: (num - 1) * IndentSize,
             size: "title_#{num}",

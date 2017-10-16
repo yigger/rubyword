@@ -18,12 +18,9 @@ module Rubyword
 						'/word/webSettings.xml' => "#{wordMLPrefix}.webSettings+xml",
 						'/word/fontTable.xml' => "#{wordMLPrefix}.fontTable+xml"
 					}
-          
-          [@rubyword.header, @rubyword.footer].each do |target|
-            next if target.nil?
-            overrides.merge!("/word/#{target[:type].to_s}#{target[:id]}.xml" => "#{wordMLPrefix}.#{target[:type].to_s}+xml")
-          end
-
+					@rubyword.content_types.each do |target|
+						overrides.merge!(target)
+					end
 					builder = Nokogiri::XML::Builder.new do |xml|
 						xml.Types(xmlns: 'http://schemas.openxmlformats.org/package/2006/content-types') do
 							xml.Default(Extension: 'rels', ContentType: "application/vnd.openxmlformats-package.relationships+xml")

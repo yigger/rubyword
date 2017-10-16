@@ -4,6 +4,7 @@ require_relative "writer"
 module Rubyword
   class Document
     attr_accessor :sections, :init_rid
+    attr_accessor :relation_rids, :content_types, :rels_documents
     attr_accessor :toc, :header, :footer
     attr_accessor :doc_info
     include Writer
@@ -15,6 +16,9 @@ module Rubyword
 
     def initialize(options={}, &block)
       @sections, @toc, @init_rid, @doc_info = [], {}, 7, {}
+      @relation_rids = []
+      @content_types = []
+      @rels_documents = []
       instance_eval(&block) if block_given?
     end
 
@@ -37,6 +41,14 @@ module Rubyword
         text_align: options[:align] || 'center',
         type: 'header'
       }
+      self.content_types << {
+        "/word/header1.xml" => "application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"
+      }
+      self.rels_documents << {
+        Id: "rId#{self.init_rid}", 
+        Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/header", 
+        Target: "header1.xml"
+      }
       self.init_rid = self.init_rid + 1
     end
 
@@ -48,6 +60,14 @@ module Rubyword
         text_align: options[:align] || 'center',
         nums_type: options[:nums_type],
         type: 'footer'
+      }
+      self.content_types << {
+        "/word/footer1.xml" => "application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"
+      }
+      self.rels_documents << {
+        Id: "rId#{self.init_rid}", 
+        Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer",
+        Target: "footer1.xml"
       }
       self.init_rid = self.init_rid + 1
     end
