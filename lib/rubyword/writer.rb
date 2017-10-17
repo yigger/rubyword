@@ -24,6 +24,7 @@ require_relative 'writer/element/text'
 require_relative 'writer/element/toc'
 require_relative 'writer/element/link'
 require_relative 'writer/element/page_break'
+require_relative 'writer/element/text_break'
 
 module Rubyword
   module Writer

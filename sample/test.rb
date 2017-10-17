@@ -22,9 +22,11 @@ Rubyword::Document::generate(filename) {
     # title_2 'NoSQL'
     
     text 'hello word123'
-    page_break
+    # page_break
+    text_break
+    text 'hello word1'
     title_1 'section2 title'
-    page_break 2
+    # page_break 2
 
     # link '哈哈', 'http://www.baidu.com', text_align: 'center'
     # text 'hello word3'

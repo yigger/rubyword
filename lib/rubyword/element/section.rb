@@ -3,13 +3,13 @@ require_relative 'base'
 require_relative 'text'
 require_relative 'link'
 require_relative 'page_break'
-
+require_relative 'text_break'
 module Rubyword
   module Element
     class Section
             
       attr_accessor :section_id, :style, :rubyword, :section_objects
-      attr_accessor :e_text, :e_list, :e_link, :e_page_break
+      attr_accessor :e_text, :e_list, :e_link, :e_page_break, :e_text_break
 
       def initialize(section_count, style = nil, rubyword=nil)
 				@section_id = section_count
@@ -59,8 +59,10 @@ module Rubyword
         @section_objects << @e_page_break.class.name.split('::').last
       end
 
-      def text_break
-
+      def text_break(break_num=1)
+        @e_text_break ||= TextBreak.new(@rubyword)
+        @e_text_break.write_object(break_num)
+        @section_objects << @e_text_break.class.name.split('::').last
       end
 
     end
