@@ -22,10 +22,13 @@ Rubyword::Document::generate(filename) {
     # title_2 'NoSQL'
     
     text 'hello word123'
+    page_break
     title_1 'section2 title'
-    link '哈哈', 'http://www.baidu.com', text_align: 'center'
-    text 'hello word3'
-    link 'baidu', 'http://www.baidu.com', text_align: 'center'
+    page_break 2
+
+    # link '哈哈', 'http://www.baidu.com', text_align: 'center'
+    # text 'hello word3'
+    # link 'baidu', 'http://www.baidu.com', text_align: 'center'
     # text 'hello word1', indent_between: '1440-1440'
     # text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
     # title_1 'section2 title'

@@ -37,8 +37,8 @@ module Rubyword
         @rubyword.sections.each do |section|
           current_section = current_section + 1
           # 遍历输出各对象 object 信息
-          section.section_objects.each do |object|
-            @object_blocks << eval("Writer::Element::#{object.capitalize}.new(@rubyword, section, xml).write")
+          section.section_objects.each do |class_name|
+            @object_blocks << eval("Writer::Element::#{class_name}.new(@rubyword, section, xml).write")
           end
           if current_section == sections_count
             @object_blocks << Style::Section.new(section, xml, @rubyword).write
