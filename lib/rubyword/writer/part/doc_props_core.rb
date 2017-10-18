@@ -12,7 +12,7 @@ module Rubyword
 						'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance'
           }
           infomartion = @rubyword.doc_info
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
             xml.send('cp:coreProperties', xmlns) do
               xml.send('dc:title', infomartion[:title])
               xml.send('dc:subject', infomartion[:subject])

@@ -15,7 +15,7 @@ module Rubyword
 						'xmlns:w' => 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
 						'xmlns:wne' => 'http://schemas.microsoft.com/office/word/2006/wordml'
 					}
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.send('w:numbering', xmlns) {
 							xml.send('w:abstractNum', 'w:abstractNumId' => 3) {
 								xml.send('w:nsid', 'w:val' => '5E15211D')

@@ -4,7 +4,7 @@ require_relative "writer"
 module Rubyword
   class Document
     attr_accessor :sections, :init_rid
-    attr_accessor :relation_rids, :content_types, :rels_documents
+    attr_accessor :relation_rids, :content_types, :rels_documents, :images
     attr_accessor :toc, :header, :footer
     attr_accessor :doc_info
     include Writer
@@ -19,6 +19,7 @@ module Rubyword
       @relation_rids = []
       @content_types = []
       @rels_documents = []
+      @images = []
       instance_eval(&block) if block_given?
     end
 

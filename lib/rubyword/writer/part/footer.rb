@@ -17,7 +17,7 @@ module Rubyword
 
         def write
           footer = @rubyword.footer
-          builder = Nokogiri::XML::Builder.new do |xml|
+          builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
             xml.send('w:ftr', ATTRIBUTE) {
               xml.p {
                 if footer[:text_align]

@@ -24,7 +24,7 @@ module Rubyword
             'xmlns:w' => 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
             'xmlns:r' => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships'
           }
-          builder = Nokogiri::XML::Builder.new do |xml|
+          builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.send('w:styles', attribute) {
               default_setting(xml)
               normal_style(xml)

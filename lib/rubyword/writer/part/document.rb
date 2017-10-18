@@ -15,7 +15,7 @@ module Rubyword
       }
 
       def write
-        builder = Nokogiri::XML::Builder.new do |xml|
+        builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
           xml.send('w:document', DOCUMENT_ATTR) {
             xml.send('w:body') {
               section_write(xml)

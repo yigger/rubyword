@@ -10,7 +10,7 @@ module Rubyword
 						'docProps/custom.xml'     => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties',
 						'word/document.xml' => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument'
 					}
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.Relationships(xmlns: 'http://schemas.openxmlformats.org/package/2006/relationships') do
 							3.times.each do |num|
 								num = num + 1

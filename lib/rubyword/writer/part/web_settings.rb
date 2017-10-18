@@ -8,7 +8,7 @@ module Rubyword
 						'xmlns:r' => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
 						'xmlns:w' => 'http://schemas.openxmlformats.org/wordprocessingml/2006/main',
 					}
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.send('w:webSettings', webs){
 							xml.send('w:optimizeForBrowser')
 						}

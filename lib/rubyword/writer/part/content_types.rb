@@ -21,7 +21,7 @@ module Rubyword
 					@rubyword.content_types.each do |target|
 						overrides.merge!(target)
 					end
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.Types(xmlns: 'http://schemas.openxmlformats.org/package/2006/content-types') do
 							xml.Default(Extension: 'rels', ContentType: "application/vnd.openxmlformats-package.relationships+xml")
 							xml.Default(Extension: 'xml', ContentType: 'application/xml')

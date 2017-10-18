@@ -24,6 +24,7 @@ require_relative 'writer/element/text'
 require_relative 'writer/element/toc'
 require_relative 'writer/element/link'
 require_relative 'writer/element/list'
+require_relative 'writer/element/image'
 require_relative 'writer/element/page_break'
 require_relative 'writer/element/text_break'
 
@@ -50,6 +51,14 @@ module Rubyword
       filename = File.join(::Rubyword::TEMP_PATH, filename) if DEBUG
       buffer = Zip::OutputStream.write_buffer do |zio|
         write_header_and_footer(zio)
+
+        # write image
+        self.images.each do |image|
+          source = open(image[:path]).read 
+          zio.put_next_entry("word/media/#{image[:filename]}")
+          zio.write(source)
+        end
+
         DocumentBaseFile.each do |helper_method, entry|
           obj = eval "Part::#{helper_method}.new(self)"
           source = obj.write

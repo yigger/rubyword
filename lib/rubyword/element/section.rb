@@ -3,6 +3,7 @@ require_relative 'base'
 require_relative 'text'
 require_relative 'link'
 require_relative 'list'
+require_relative 'image'
 require_relative 'page_break'
 require_relative 'text_break'
 module Rubyword
@@ -10,7 +11,7 @@ module Rubyword
     class Section
             
       attr_accessor :section_id, :style, :rubyword, :section_objects
-      attr_accessor :e_text, :e_list, :e_link, :e_page_break, :e_text_break
+      attr_accessor :e_text, :e_list, :e_link, :e_page_break, :e_text_break, :e_image
 
       def initialize(section_count, style = nil, rubyword=nil)
 				@section_id = section_count
@@ -40,12 +41,14 @@ module Rubyword
         @section_objects << @e_list.class.name.split('::').last
       end
 
-      def image
-        # @section_objects << __method__.to_s
+      def image(url)
+        @e_image ||= Image.new(@rubyword)
+        @e_image.write_object(url)
+        @section_objects << @e_image.class.name.split('::').last
       end
 
       def chart
-        # @section_objects << __method__.to_s
+        
       end
 
       def link(text, link, style=nil)

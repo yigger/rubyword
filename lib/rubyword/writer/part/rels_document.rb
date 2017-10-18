@@ -12,7 +12,7 @@ module Rubyword
 						'webSettings.xml'  => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/webSettings',
 						'fontTable.xml'    => 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable',
 					}
-					builder = Nokogiri::XML::Builder.new do |xml|
+					builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
 						xml.Relationships(xmlns: 'http://schemas.openxmlformats.org/package/2006/relationships') do
 							xmlRels.keys.each_with_index do |rel_name, index|
 								id = index + 1

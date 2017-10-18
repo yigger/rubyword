@@ -17,7 +17,7 @@ module Rubyword
 
         def write
           text_align = @rubyword.header[:text_align]
-          builder = Nokogiri::XML::Builder.new do |xml|
+          builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
             xml.send('w:hdr', ATTRIBUTE) {
               xml.p {
                 if text_align
