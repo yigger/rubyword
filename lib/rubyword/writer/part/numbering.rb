@@ -16,7 +16,32 @@ module Rubyword
 						'xmlns:wne' => 'http://schemas.microsoft.com/office/word/2006/wordml'
 					}
 					builder = Nokogiri::XML::Builder.new do |xml|
-						xml.send('w:numbering', xmlns)
+						xml.send('w:numbering', xmlns) {
+							xml.send('w:abstractNum', 'w:abstractNumId' => 3) {
+								xml.send('w:nsid', 'w:val' => '5E15211D')
+								xml.send('w:multiLevelType', 'w:val' => 'multilevel')
+								2.times.each do |index|
+									num = index + 1
+									left = num * 360
+									xml.send('w:lvl', 'w:ilvl' => index) {
+										xml.send('w:start', 'w:val' => 1)
+										xml.send('w:numFmt', 'w:val' => 'decimal')
+										xml.send('w:suff', 'w:val' => 'tab')
+										xml.send('w:lvlText', 'w:val' => "%#{num}.")
+										xml.send('w:pPr') {
+											xml.send('w:tabs') {
+												xml.send('w:tab', 'w:val' => 'num', 'w:pos' => 360)
+											}
+											xml.send('w:ind', 'w:left'=> left, 'w:hanging' => 360)
+										}
+									}
+								end
+							} # end of lvl style
+							
+							xml.send('w:num', 'w:numId' => 3) {
+								xml.send('w:abstractNumId', 'w:val' => 3)
+							}
+						}
 					end
 					builder.to_xml
 				end

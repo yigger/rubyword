@@ -22,8 +22,8 @@ or add these to Gemfile
 + Support the insertion of a variety of different attributes of the title, such as: title, sub title, etc.
 + Support for inserte blank lines and blank lines between pages and pages
 + Support for inserte multiple images (developing)
-+ Support for inserte multiple lists (developing)
-+ Support for insert chart (developing)
++ Support for inserte multiple lists 
++ Support for insert table (developing)
 + Support for insert link 
 + A lot of features to be continue
 

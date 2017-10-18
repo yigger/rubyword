@@ -2,17 +2,15 @@
 module Rubyword
   module Element
     class List < Base
-      attr_accessor :texts
+      attr_accessor :lists
 
-      def write_object(text)
-        @texts ||= []
-        @rubyword.relation_rids << {
-          Id: "rId#{@rubyword.init_rid}",
-          Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
-          Target: text,
-          TargetMode: 'External'
+      # write document and numbering
+      def write_object(text, level, style)
+        @lists ||= Queue.new
+        @lists << {
+          level: level.to_i - 1,
+          text: text
         }
-        @rubyword.init_rid = @rubyword.init_rid + 1
       end
 
     end

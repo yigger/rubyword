@@ -2,6 +2,7 @@
 require_relative 'base'
 require_relative 'text'
 require_relative 'link'
+require_relative 'list'
 require_relative 'page_break'
 require_relative 'text_break'
 module Rubyword
@@ -33,10 +34,10 @@ module Rubyword
 			alias :title_3 :text
 			alias :title_4 :text
 
-      def list
+      def list(text, level, style=nil)
         @e_list ||= List.new(@rubyword)
+        @e_list.write_object(text, level, style)
         @section_objects << @e_list.class.name.split('::').last
-        @e_list.write_object(text, style)
       end
 
       def image
