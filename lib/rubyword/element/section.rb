@@ -9,15 +9,15 @@ require_relative 'text_break'
 module Rubyword
   module Element
     class Section
-            
-      attr_accessor :section_id, :style, :rubyword, :section_objects
+      attr_accessor :section_id, :style, :rubyword, :section_objects, :objects
       attr_accessor :e_text, :e_list, :e_link, :e_page_break, :e_text_break, :e_image
-
+      
       def initialize(section_count, style = nil, rubyword=nil)
 				@section_id = section_count
 				@style = style
         @rubyword = rubyword
         @section_objects = []
+        @objects = []
       end
 
       def generate(&block)
@@ -25,10 +25,9 @@ module Rubyword
       end
 
 			def text(text, style=nil)
-        @e_text ||= Text.new(@rubyword)
-        @section_objects << @e_text.class.name.split('::').last
-				call_method_name = __callee__.to_s
-				@e_text.write_object(text, call_method_name, style)
+        object ||= Text.new(@rubyword)
+        object.save(text, __callee__.to_s, style)
+        @objects << object
 			end
 			alias :title_1 :text
 			alias :title_2 :text
@@ -36,33 +35,33 @@ module Rubyword
 			alias :title_4 :text
 
       def list(text, level, style=nil)
-        @e_list ||= List.new(@rubyword)
-        @e_list.write_object(text, level, style)
-        @section_objects << @e_list.class.name.split('::').last
+        object ||= List.new(@rubyword)
+        object.save(text, level, style)
+        @objects << object
       end
 
       def image(url)
-        @e_image ||= Image.new(@rubyword)
-        @e_image.write_object(url)
-        @section_objects << @e_image.class.name.split('::').last
+        object ||= Image.new(@rubyword)
+        object.save(url)
+        @objects << object
       end
 
       def link(text, link, style=nil)
-        @e_link ||= Link.new(@rubyword)
-        @e_link.write_object(text, link, style)
-        @section_objects << @e_link.class.name.split('::').last
+        object ||= Link.new(@rubyword)
+        object.save(text, link, style)
+        @objects << object
       end
 
       def page_break(break_num=1)
-        @e_page_break ||= PageBreak.new(@rubyword)
-        @e_page_break.write_object(break_num)
-        @section_objects << @e_page_break.class.name.split('::').last
+        object ||= PageBreak.new(@rubyword)
+        object.save(break_num)
+        @objects << object
       end
 
       def text_break(break_num=1)
-        @e_text_break ||= TextBreak.new(@rubyword)
-        @e_text_break.write_object(break_num)
-        @section_objects << @e_text_break.class.name.split('::').last
+        object ||= TextBreak.new(@rubyword)
+        object.save(break_num)
+        @objects << object
       end
 
     end

@@ -1,52 +1,78 @@
 require_relative '../lib/rubyword'
 filename = File.join(Rubyword::TEMP_PATH, 'hello.docx')
 Rubyword::Document::generate(filename) {
-  # information({
-  #   company: 'ruby word',
-  #   creator: 'young',
-  #   title: 'example word file',
-  #   description: 'this is a example docx'
-  # })
-
-  # title_directory font_size: 24
-  # add_header 'zhbit'
-  # add_footer nil, text_align: 'center', nums_type: 'number'
+  # write the doc infomation
+  information({
+    company: 'ruby word',
+    creator: 'young',
+    title: 'example word file',
+    description: 'this is a example docx',
+    subject: 'how to create doc info',
+    keywords: 'remark',
+    category: 'category'
+  })
   
-  # section {
-    
-  #   title_1 '系统架构', ignore_dir: true 
-  #   title_2 '架构视图'
-  #   title_1 '数据库'
-  #   title_2 'MySQL'
-  #   title_2 'NoSQL'
-    
-  #   text 'hello word123'
-  #   # page_break
-  #   text_break
-  #   text 'hello word1'
-  #   title_1 'section2 title'
-  #   page_break 2
+  # Generate the directory structure
+  title_directory font_size: 24
 
-  #   link '哈哈', 'http://www.baidu.com', text_align: 'center'
-  #   text 'hello word3'
-  #   link 'baidu', 'http://www.baidu.com', text_align: 'center'
-  #   text 'hello word1', indent_between: '1440-1440'
-  #   text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
-  #   title_1 'section2 title'
+  # insert header
+  add_header 'rubyword'
 
-  #   title_2 'section2 title'
-  #   title_3 'section2 title'
-  # }
+  # insert footer with number
+  add_footer nil, text_align: 'center', nums_type: 'number'
+  # insert text
+  # add_footer 'hello', text_align: 'center'
+  # initialize section and insert something in the section
+  section {
+    # insert title
+    title_1 "It's a title", ignore_dir: true 
+    # insert subtitle
+    title_2 "It's a subtitle"
+    # insert title
+    title_1 'Database'
+    # insert subtitle
+    title_2 'MySQL'
+    # insert No.3 title
+    title_3 'NoSQL'
+    # text break
+    text_break 3
+    # insert text
+    text 'hello word', bgcolor: 'yellow', text_align: 'center'
+    # page break
+    page_break 2
+    # insert text
+    text 'hello word', indent_between: '1440-1440'
+    text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
 
-  # section {
-  #   list 'test1', 1
-  #   list 'test1', 2
-  #   list 'test3', 2
-  #   list 'test2', 1
-  #   list 'test2', 1
-  # }
+    # insert title
+    title_1 'section2 title'
+    title_2 'section2 title'
+    title_3 'section2 title'
 
-  # section {
-  #   image 'http://www.baidu.com/img/bd_logo1.png'
-  # }
+    # add a link
+    link 'baidu', 'http://www.baidu.com', text_align: 'center'
+  }
+
+  section {
+    # insert a text
+    text 'another Section', bgcolor: 'yellow', text_align: 'center'
+
+    # insert a text
+    text 'hello word', indent_between: '1440-1440'
+    text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
+  }
+
+  section {
+    list 'test1', 1
+    list 'test1', 2
+    list 'test3', 2
+    list 'test2', 1
+    list 'test2', 1
+  }
+
+  section {
+    # add a link
+    link 'baidu', 'http://www.baidu.com', text_align: 'center'
+    image 'http://www.baidu.com/img/bd_logo1.png'
+  }
 }

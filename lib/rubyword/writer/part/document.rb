@@ -1,7 +1,8 @@
-# -*- encoding : utf-8 -*-
+# -*- encoding : utf-8 -*
 module Rubyword
   module Writer
     class Part::Document < Part::Base
+      include ::Rubyword::Writer::Part::Toc
       DOCUMENT_ATTR = {
         'xmlns:ve' => "http://schemas.openxmlformats.org/markup-compatibility/2006",
         'xmlns:o' => "urn:schemas-microsoft-com:office:office",
@@ -31,15 +32,18 @@ module Rubyword
         current_section = 0
 
         # write TOC
-        toc_block = Writer::Element::Toc.new(@rubyword, section, xml).write
+        toc_block = write_toc(@rubyword, xml)
         @object_blocks.push(toc_block) if toc_block
 
         @rubyword.sections.each do |section|
           current_section = current_section + 1
           # 遍历输出各对象 object 信息
-          section.section_objects.each do |class_name|
-            @object_blocks << eval("Writer::Element::#{class_name}.new(@rubyword, section, xml).write")
-          end
+          section.objects.each{|object| @object_blocks << object.write(section, xml)}
+          
+          # object.write
+          # section.section_objects.each do |class_name|
+          #   @object_blocks << eval("Writer::Element::#{class_name}.new(@rubyword, section, xml).write")
+          # end
           if current_section == sections_count
             @object_blocks << Style::Section.new(section, xml, @rubyword).write
           else

@@ -3,9 +3,9 @@ module Rubyword
   module Element
     class Base
 
-      attr_accessor :section_id, :style, :init_rid, :texts, :rubyword, :relation_rids
+      attr_accessor :rubyword
 
-      def initialize(rubyword, relation_rids=nil)
+      def initialize(rubyword)
         @rubyword = rubyword
         @init_rid = @rubyword.init_rid
       end

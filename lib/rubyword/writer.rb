@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require_relative "writer/part/base"
+require_relative "writer/part/toc"
 require_relative "writer/part/content_types"
 require_relative "writer/part/doc_props_app"
 require_relative "writer/part/doc_props_core"
@@ -18,15 +19,6 @@ require_relative "writer/part/header"
 # style file
 require_relative 'writer/style/base'
 require_relative 'writer/style/section'
-# element
-require_relative 'writer/element/base'
-require_relative 'writer/element/text'
-require_relative 'writer/element/toc'
-require_relative 'writer/element/link'
-require_relative 'writer/element/list'
-require_relative 'writer/element/image'
-require_relative 'writer/element/page_break'
-require_relative 'writer/element/text_break'
 
 module Rubyword
   module Writer
