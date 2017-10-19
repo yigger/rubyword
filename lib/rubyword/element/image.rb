@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 require "open-uri"
+require 'fastimage'
 module Rubyword
   module Element
     class Image < Base
@@ -8,9 +9,12 @@ module Rubyword
       def write_object(url, style=nil)
         @images ||= Queue.new
         filename = url.split('/').last
+        width, height = FastImage.size(url)
         image_params = {
           rid: @rubyword.init_rid,
           path: url,
+          width: width,
+          height: height,
           filename: filename
         }
         @images << image_params

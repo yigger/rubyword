@@ -7,11 +7,11 @@ module Rubyword
           return nil unless @section.e_image
           image = @section.e_image.images.pop
           @xml.send('w:p') {
-            @xml.send('w:rPr', 'type' => '#_x0000_t75', 'style' => "width:113.38582677165px; height:113.38582677165px; margin-left:585.82677165354px; margin-top:58.582677165354px; position:absolute; mso-position-horizontal:right; mso-position-vertical:top; mso-position-horizontal-relative:page; mso-position-vertical-relative:page;")
+            @xml.send('w:pPr')
             @xml.send('w:r') {
               @xml.send('w:pict') {
-                @xml.send('v:shape') {
-                  @xml.send('w10:wrap', 'title' => 'inline', 'anchorx' => 'page', 'anchory' => 'page')
+                @xml.send('v:shape', 'type' => '#_x0000_t75', 'style' => "width:#{image[:width]}px; height:#{image[:height]}px; margin-left:0px; margin-top:0px; mso-position-horizontal:left; mso-position-vertical:top; mso-position-horizontal-relative:char; mso-position-vertical-relative:line;") {
+                  @xml.send('w10:wrap', 'type' => 'inline', 'anchorx' => 'page', 'anchory' => 'page')
                   @xml.send('v:imagedata', 'r:id' => "rId#{image[:rid]}", 'o:title' => '')
                 }
               }
