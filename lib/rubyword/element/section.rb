@@ -47,10 +47,6 @@ module Rubyword
         @section_objects << @e_image.class.name.split('::').last
       end
 
-      def chart
-        
-      end
-
       def link(text, link, style=nil)
         @e_link ||= Link.new(@rubyword)
         @e_link.write_object(text, link, style)
