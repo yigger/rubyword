@@ -30,20 +30,13 @@ module Rubyword
         @object_blocks = []
         sections_count = @rubyword.sections.count
         current_section = 0
-
         # write TOC
         toc_block = write_toc(@rubyword, xml)
         @object_blocks.push(toc_block) if toc_block
-
         @rubyword.sections.each do |section|
           current_section = current_section + 1
           # 遍历输出各对象 object 信息
           section.objects.each{|object| @object_blocks << object.write(section, xml)}
-          
-          # object.write
-          # section.section_objects.each do |class_name|
-          #   @object_blocks << eval("Writer::Element::#{class_name}.new(@rubyword, section, xml).write")
-          # end
           if current_section == sections_count
             @object_blocks << Style::Section.new(section, xml, @rubyword).write
           else

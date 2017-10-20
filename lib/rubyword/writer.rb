@@ -40,7 +40,6 @@ module Rubyword
     }.freeze
 
     def save(filename = 'document.docx')
-      filename = File.join(::Rubyword::TEMP_PATH, filename) if DEBUG
       buffer = Zip::OutputStream.write_buffer do |zio|
         write_header_and_footer(zio)
 
@@ -61,26 +60,6 @@ module Rubyword
       file = File.new(filename,'wb')
       file.write(buffer.string)
       file.close
-
-      if DEBUG
-        destination = File.join(::Rubyword::TEMP_PATH, 'unzip/')
-        extract_zip(filename, destination)
-      end
-    end
-
-    # debug function
-    def extract_zip(file, destination)
-      FileUtils.mkdir_p(destination)
-    
-      Zip::File.open(file) do |zip_file|
-        zip_file.each do |f|
-          fpath = File.join(destination, f.name)
-          file = File.new(fpath,'wb')
-          content = f.get_input_stream.read
-          file.write(content)
-          file.close
-        end
-      end
     end
 
     def write_header_and_footer(zio)

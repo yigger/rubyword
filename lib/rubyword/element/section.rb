@@ -9,9 +9,7 @@ require_relative 'text_break'
 module Rubyword
   module Element
     class Section
-      attr_accessor :section_id, :style, :rubyword, :section_objects, :objects
-      attr_accessor :e_text, :e_list, :e_link, :e_page_break, :e_text_break, :e_image
-      
+      attr_accessor :section_id, :style, :rubyword, :section_objects, :objects, :titles
       def initialize(section_count, style = nil, rubyword=nil)
 				@section_id = section_count
 				@style = style
@@ -25,7 +23,7 @@ module Rubyword
       end
 
 			def text(text, style=nil)
-        object ||= Text.new(@rubyword)
+        object ||= Text.new(@rubyword, self)
         object.save(text, __callee__.to_s, style)
         @objects << object
 			end

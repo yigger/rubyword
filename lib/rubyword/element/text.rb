@@ -2,7 +2,7 @@
 module Rubyword
   module Element
     class Text < Base
-      attr_accessor :texts, :titles
+      attr_accessor :texts
       
       IndentSize = 200
       WordStyleList = {
@@ -24,7 +24,7 @@ module Rubyword
 
       def save(text, type, style)
         @texts ||= Queue.new
-        @titles ||= []
+        @section.titles ||= []
         return if text.nil?
         if type == 'text'
           text(text, style)
@@ -47,7 +47,7 @@ module Rubyword
             rid: @rubyword.init_rid,
             style: style
           }
-          @titles << title_hs if (style && !style[:ignore_dir]) || style.nil?
+          @section.titles << title_hs if (style && !style[:ignore_dir]) || style.nil?
           @texts << title_hs
           @rubyword.init_rid = @rubyword.init_rid + 1
         end

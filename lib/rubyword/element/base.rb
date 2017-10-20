@@ -2,12 +2,10 @@
 module Rubyword
   module Element
     class Base
-
-      attr_accessor :rubyword
-
-      def initialize(rubyword)
+      attr_accessor :rubyword, :section
+      def initialize(rubyword, section=nil)
         @rubyword = rubyword
-        @init_rid = @rubyword.init_rid
+        @section = section
       end
 
     end
