@@ -6,11 +6,11 @@ This project is under developing, and develop by myself until now, so the progre
 
 # Installing RubyWord
 ```
-  gem install rubyword
+gem install rubyword
 ```
 or put this line in your Gemfile
 ```
-  gem 'rubyword'
+gem 'rubyword'
 ```
 # Features
 + Support for setting the properties of the document, such as: title, subject, author and other information
