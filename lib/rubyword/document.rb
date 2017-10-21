@@ -5,8 +5,8 @@ module Rubyword
   class Document
     attr_accessor :sections, :init_rid
     attr_accessor :relation_rids, :content_types, :rels_documents, :images
-    attr_accessor :toc, :header, :footer
-    attr_accessor :doc_info
+    attr_accessor :header, :footer
+    attr_accessor :doc_info, :toc
     include Writer
 
     def self.generate(filename, options = {}, &block)

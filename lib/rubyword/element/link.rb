@@ -3,7 +3,6 @@ module Rubyword
     module Element
       class Link < Base
         attr_accessor :links
-  
         def save(text, link, style)
 					@links ||= Queue.new
 					return if text.nil?

@@ -42,7 +42,7 @@ module Rubyword
           else
             p_block = xml.send('w:p') {
               xml.send('w:pPr') {
-                Style::Section.new(section, xml, @rubyword).write
+                @object_blocks << Style::Section.new(section, xml, @rubyword).write
               }
             }
             @object_blocks << p_block

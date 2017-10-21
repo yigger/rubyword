@@ -7,7 +7,6 @@ module Rubyword
         @rubyword = rubyword
         @section = section
       end
-
     end
   end
 end

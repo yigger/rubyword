@@ -4,7 +4,6 @@ module Rubyword
     module Part
       class Base
         attr_accessor :rubyword, :section
-        
         def initialize(rubyword, section=nil)
           @rubyword, @section = rubyword, section
         end

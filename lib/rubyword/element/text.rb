@@ -6,20 +6,20 @@ module Rubyword
       
       IndentSize = 200
       WordStyleList = {
-        font_size: 'w:sz', # 字体大小
-        color: 'w:color', # 字体颜色
-        underline: 'w:u',  # 下划线
-        blod: 'w:b', # 加粗
-        all_caps: 'w:caps', # 转大写
-        italic: 'w:i', # 斜体
-        bgcolor: 'w:highlight', # 背景颜色
+        font_size: 'w:sz',
+        color: 'w:color',
+        underline: 'w:u', 
+        blod: 'w:b', 
+        all_caps: 'w:caps',
+        italic: 'w:i',
+        bgcolor: 'w:highlight'
       }.freeze
       ParagraphStyleList = {
         text_align: 'w:jc',
-        spacing: 'w:spacing', # Spacing between paragraphs and between lines of a paragaph is defined with the <w:spacing> element.
+        spacing: 'w:spacing',
         indent_left: 'w:ind',
         indent_right: 'w:ind',
-        indent_between: 'w:ind',
+        indent_between: 'w:ind'
       }.freeze
 
       def save(text, type, style)

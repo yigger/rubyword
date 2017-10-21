@@ -11,16 +11,17 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Generate MS Word for ruby}
   spec.description   = %q{RubyWord is a simple, efficient Word document generation gem and easy to generate docx file.}
-  spec.homepage      = "https://github.com/ruby-office/rubyword"
-  spec.license       = "MIT"
+  spec.homepage      = "https://github.com/yigger/rubyword"
+  spec.license = "MIT"
+  spec.files = `git ls-files`.split($/)
+  spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "bundler", "~> 1.15"
+  spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "nokogiri"
+  spec.add_development_dependency "zip"
+  spec.add_development_dependency "open-uri"
+  spec.add_development_dependency "fastimage"
 end

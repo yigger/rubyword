@@ -1,11 +1,8 @@
 # -*- encoding : utf-8 -*-
-require "open-uri"
-require 'fastimage'
 module Rubyword
   module Element
     class Image < Base
       attr_accessor :images
-
       def save(url, style=nil)
         @images ||= Queue.new
         filename = url.split('/').last
