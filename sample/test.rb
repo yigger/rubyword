@@ -73,6 +73,6 @@ Rubyword::Document::generate(filename) {
   section {
     # add a link
     link 'baidu', 'http://www.baidu.com', text_align: 'center'
-    image 'http://www.baidu.com/img/bd_logo1.png'
+    # image 'http://www.baidu.com/img/bd_logo1.png'
   }
 }
