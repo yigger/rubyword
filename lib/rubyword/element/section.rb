@@ -10,16 +10,21 @@ module Rubyword
   module Element
     class Section
       attr_accessor :section_id, :style, :rubyword, :section_objects, :objects, :titles
+      attr_accessor :paragraph, :text_blocks
+
       def initialize(section_count, style = nil, rubyword=nil)
+        @paragraph = false
 				@section_id = section_count
 				@style = style
         @rubyword = rubyword
         @section_objects = []
         @objects = []
+        @text_blocks = []
       end
-
-      def generate(&block)
-        !block.nil? && block.arity < 1 ? instance_eval(&block) : block[self]
+      
+      def p(&block)
+        @paragraph = true
+        instance_eval(&block) if block_given?
       end
 
 			def text(text, style=nil)

@@ -11,6 +11,8 @@ module Rubyword
 
     def self.generate(filename, options = {}, &block)
       rubyword = new(options, &block)
+
+      # module Write to create word document
       rubyword.save(filename)
     end
 

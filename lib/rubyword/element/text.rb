@@ -67,18 +67,26 @@ module Rubyword
       end
 
       def write(section=nil, xml=nil)
-        @xml = xml
+        @xml, @section = xml, section
         text = self.texts.pop
         eval "write_#{text[:size]}(text)"
       end
 
       def write_normal(text)
-        @xml.send('w:p') do
+        lambda_text = lambda {
           write_paragraph_style(text[:style])
           @xml.send('w:r') do
             write_word_style(text[:style])
             @xml.send('w:t', {'xml:space' => 'preserve'}, text[:text])
           end
+        }
+
+        if @section.paragraph
+          @section.text_blocks << lambda_text
+        else
+          @xml.send('w:p') { 
+            lambda_text.call
+          }
         end
       end
 
