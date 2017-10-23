@@ -32,34 +32,26 @@ module Rubyword
           sections_count = @rubyword.sections.count
           current_section = 0
           # write TOC
-          toc_block = write_toc(@rubyword, xml)
-          @object_blocks << toc_block if toc_block
-
+          write_toc(@rubyword, xml)
           # To write all sections xml.
           @rubyword.sections.each do |section|
             current_section = current_section + 1
             section.objects.each{|object| 
-              @object_blocks << object.write(section, xml)
-              # if section.paragraph && object.class.name != 'Rubyword::Element::Text'
-              #   xml.send('w:p') {
-              #     # exec the text block
-              #     section.text_blocks.each{|block| block.call}
-              #   }
-              #   section.paragraph = false
-              # end
+              # text should save in block
+              object.write(section, xml)
             }
+            # write in the last
             if current_section == sections_count
-              @object_blocks << Style::Section.new(section, xml, @rubyword).write
+              Style::Section.new(section, xml, @rubyword).write
             else
-              p_block = xml.send('w:p') {
+              xml.send('w:p') {
                 xml.send('w:pPr') {
-                  @object_blocks << Style::Section.new(section, xml, @rubyword).write
+                  Style::Section.new(section, xml, @rubyword).write
                 }
               }
-              @object_blocks << p_block
             end
           end
-          @object_blocks
+
         end
         
       end # end of class

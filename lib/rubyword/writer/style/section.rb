@@ -31,7 +31,6 @@ module Rubyword
         def write
           @xml.send('w:sectPr') {
             # header or footerReference
-
             [@rubyword.header, @rubyword.footer].each do |target|
               next if target.nil?
               @xml.send("w:#{target[:type]}Reference", {

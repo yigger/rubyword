@@ -12,16 +12,26 @@ Rubyword::Document::generate(filename) {
   #   category: 'category'
   # })
   
+  section {
+    text '33333'
+    p {
+      text 'test1 '
+      text 'test2'
+      link 'baidu', 'baidu'
+    }
+    text '2585220'
+  }
+
   # # Generate the directory structure
   # title_directory font_size: 24
 
-  # # insert header
+  # insert header
   # add_header 'rubyword'
 
   # # insert footer with number
   # add_footer nil, text_align: 'center', nums_type: 'number'
   # # insert text
-  # # add_footer 'hello', text_align: 'center'
+  # add_footer 'hello', text_align: 'center'
   # # initialize section and insert something in the section
   # section {
   #   # insert title
@@ -76,11 +86,9 @@ Rubyword::Document::generate(filename) {
   #   # image 'http://www.baidu.com/img/bd_logo1.png'
   # }
 
-  section {
-    p {
-      text 'test1'
-      text 'test2'
-    }
-    
-  }
+  # section {
+  #   title_1 'section1 title'
+  #   title_2 'section2 title'
+  #   title_3 'section3 title'
+  # }
 }

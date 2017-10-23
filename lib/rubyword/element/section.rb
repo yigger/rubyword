@@ -6,14 +6,13 @@ require_relative 'list'
 require_relative 'image'
 require_relative 'page_break'
 require_relative 'text_break'
+require_relative 'paragraph'
 module Rubyword
   module Element
     class Section
       attr_accessor :section_id, :style, :rubyword, :section_objects, :objects, :titles
-      attr_accessor :paragraph, :text_blocks
 
       def initialize(section_count, style = nil, rubyword=nil)
-        @paragraph = false
 				@section_id = section_count
 				@style = style
         @rubyword = rubyword
@@ -23,8 +22,9 @@ module Rubyword
       end
       
       def p(&block)
-        @paragraph = true
-        instance_eval(&block) if block_given?
+        object ||= Paragraph.new(@rubyword, self)
+        object.instance_eval(&block) if block_given?
+        @objects << object
       end
 
 			def text(text, style=nil)
