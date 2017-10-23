@@ -83,7 +83,7 @@ module Rubyword
       end
 
       def write_word_style(style)
-        if style.is_a?(Hash)
+        if !style.nil? && style.is_a?(Hash)
           @xml.send('w:rPr') {
             style.keys.each do |style_name|
               style_name = style_name.to_sym
@@ -104,7 +104,7 @@ module Rubyword
       end
       
       def write_paragraph_style(style)
-        return unless style.is_a?(Hash)
+        return unless !style.nil? && style.is_a?(Hash)
         @xml.send('w:pPr') {
           style.keys.each do |style_name|
             style_name = style_name.to_sym

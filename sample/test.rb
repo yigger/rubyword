@@ -12,15 +12,14 @@ Rubyword::Document::generate(filename) {
   #   category: 'category'
   # })
   
-  section {
-    text '33333'
-    p {
-      text 'test1 '
-      text 'test2'
-      link 'baidu', 'baidu'
-    }
-    text '2585220'
-  }
+  # section {
+  #   text '33333'
+  #   p(text_align: 'center') {
+  #     text 'test1 '
+  #     text 'test2', bgcolor: 'yellow', text_align: 'center'
+  #   }
+  #   text '2585220'
+  # }
 
   # # Generate the directory structure
   # title_directory font_size: 24

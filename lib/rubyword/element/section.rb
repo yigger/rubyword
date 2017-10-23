@@ -21,8 +21,8 @@ module Rubyword
         @text_blocks = []
       end
       
-      def p(&block)
-        object ||= Paragraph.new(@rubyword, self)
+      def p(style=nil, &block)
+        object ||= Paragraph.new(@rubyword, self, style)
         object.instance_eval(&block) if block_given?
         @objects << object
       end

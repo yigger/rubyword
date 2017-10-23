@@ -14,6 +14,7 @@ gem 'rubyword'
 ```
 # Features
 + Support for setting the properties of the document, such as: title, subject, author and other information
++ Support for insert a paragraph
 + Support for generated TOC for the title
 + Support for setting header and footer
 + Support for insert title which is different attributes, such as: title, sub title, etc.
@@ -105,7 +106,6 @@ Rubyword::Document::generate('hello.docx') {
 
 # TODO
 + Support table
-+ Support paragraph
 + Support more style
 + Support Markdown/HTML to docx
 

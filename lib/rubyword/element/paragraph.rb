@@ -1,8 +1,13 @@
 # -*- encoding : utf-8 -*-
 module Rubyword
   module Element
-    class Paragraph < Base
-      attr_accessor :paragraphs
+    class Paragraph < Text
+      attr_accessor :paragraphs, :style
+      def initialize(rubyword, section=nil, style)
+        super(rubyword, section)
+        @style = style
+      end
+      
       def text(text, style=nil)
         @paragraphs ||= []
         @paragraphs << {
@@ -15,9 +20,9 @@ module Rubyword
         @xml = xml
         @xml.send('w:p') { 
           @paragraphs.each do |p|
-            # write_paragraph_style(text[:style])
+            write_paragraph_style(@style)
             @xml.send('w:r') do
-              # write_word_style(text[:style])
+              write_word_style(p[:style])
               @xml.send('w:t', {'xml:space' => 'preserve'}, p[:text])
             end
           end
@@ -27,7 +32,6 @@ module Rubyword
       def method_missing(name, *arg)
         @section.send(name.to_sym, *arg)
       end
-
     end
   end
 end
