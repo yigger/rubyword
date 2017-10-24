@@ -1,22 +1,22 @@
 # RubyWord: Microsoft Word Generation For Ruby
-> RubyWord is a simple, efficient Word document generation gem and easy to generate docx file.
+> RubyWord 是一个简单， 高效的 word 文档生成工具
 
 # Language
 * [English](README.md)
 * [简体中文](README.cn.md)
 
-# Please Read Before Use
-This project is under developing, and develop by myself until now, so the progress may be slow and there may be a lot of problems, but i will try my best to improve it and welcome everyone to join the development. Thanks for supporting.
+# 使用前请先阅读
+这个项目正在开发中，因为只有我自己在开发，所以进度可能会比较缓慢以及可能会存在很多未知的问题(:跑)，但是我会尽我所能，尽量挤出时间去完善它，同时也希望各位有兴趣的朋友也加入到开发来，欢迎多提宝贵意见或者直接提PR也是非常欢迎的，感谢支持。
 
-# Installing RubyWord
+# 安装
 ```
 gem install rubyword
 ```
-or put this line in your Gemfile
+或者将下面这句代码写入到Gemfile
 ```
 gem 'rubyword'
 ```
-# Features
+# 特性
 + Support for setting the properties of the document, such as: title, subject, author and other information
 + Support for insert a paragraph
 + Support for generated TOC for the title
@@ -27,7 +27,7 @@ gem 'rubyword'
 + Support for insert multiple lists 
 + Support for insert hyperlink 
 
-# Usage
+# 用法说明
 ```
 require "rubyword"
 Rubyword::Document::generate('hello.docx') {
@@ -108,12 +108,12 @@ Rubyword::Document::generate('hello.docx') {
 }
 ```
 
-# TODO
+# 马上要做的
 + Support table
 + Support more style
 + Support Markdown/HTML to docx
 
-# Contributing
+# 贡献
 RubyWord is use my spare time to write, so it may has a lot of Bugs and welcome everyone to create Pull Request or Issue to improve this project together.
 1. fork this project
 2. git clone your fork project
@@ -122,8 +122,8 @@ RubyWord is use my spare time to write, so it may has a lot of Bugs and welcome 
 5. git push to your fork project
 6. create a new pr to request merge
 
-# Inspiration
+# 灵感
 Thanks [PHPWord](https://github.com/PHPOffice/PHPWord), I was very surprised when I saw the PHPWord project which is a very powerful project and provide a lot of features. But I can't find such as ruby project when i search in google and I decided to write and design by myself.
 
-# License
+# 开源协议
 RubyWord is licensed under [The MIT License](LICENSE)

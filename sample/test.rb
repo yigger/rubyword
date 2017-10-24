@@ -12,14 +12,19 @@ Rubyword::Document::generate(filename) {
   #   category: 'category'
   # })
   
-  # section {
-  #   text '33333'
-  #   p(text_align: 'center') {
-  #     text 'test1 '
-  #     text 'test2', bgcolor: 'yellow', text_align: 'center'
-  #   }
-  #   text '2585220'
-  # }
+  section {
+    text '普通段落1'
+    p(text_align: 'center') {
+      text '连续的文本1'
+      text '连续的文本'
+    }
+    text '普通段落2'
+
+    p {
+      text '不居中的文本 '
+      text '黄色的文本', bgcolor: 'yellow', text_align: 'center'
+    }
+  }
 
   # # Generate the directory structure
   # title_directory font_size: 24

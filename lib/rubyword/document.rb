@@ -29,6 +29,7 @@ module Rubyword
       @section = Element::Section.new(@sections.count + 1, style, self)
       self.sections << @section
       @section.instance_eval(&block) if block_given?
+      @section
     end
 
     def title_directory(option= {})
