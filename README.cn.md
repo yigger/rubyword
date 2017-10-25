@@ -17,21 +17,22 @@ gem install rubyword
 gem 'rubyword'
 ```
 # 特性
-+ Support for setting the properties of the document, such as: title, subject, author and other information
-+ Support for insert a paragraph
-+ Support for generated TOC for the title
-+ Support for setting header and footer
-+ Support for insert title which is different attributes, such as: title, sub title, etc.
-+ Support for insert blank lines and blank page
-+ Support for insert multiple images 
-+ Support for insert multiple lists 
-+ Support for insert hyperlink 
++ 支持设置文档的属性，比如： 标题，副标题，作者以及等等
++ 支持插入段落
++ 支持根据一级标题，二级标题，多级标题自动生成目录结构
++ 支持设置页头和页尾
++ 支持插入多级标题
++ 支持插入空行符以及空白页
++ 支持插入图片
++ 支持插入列表
++ 支持插入超链接
++ 更多功能，敬请期待..
 
 # 用法说明
 ```
 require "rubyword"
 Rubyword::Document::generate('hello.docx') {
-  # write the doc infomation
+  # word 文档的属性
   information({
     company: 'ruby word',
     creator: 'young',
@@ -42,56 +43,71 @@ Rubyword::Document::generate('hello.docx') {
     category: 'category'
   })
   
-  # Generate the directory structure
+  section {
+    text '普通段落1'
+    p(text_align: 'center') {
+      text '连续的文本1'
+      text '连续的文本'
+    }
+    text '普通段落2'
+
+    p {
+      text '不居中的文本 '
+      text '黄色的文本', bgcolor: 'yellow', text_align: 'center'
+    }
+  }
+
+  # 根据标题生成目录
   title_directory font_size: 24
 
-  # insert header
+  # 插入页头
   add_header 'rubyword'
 
-  # insert footer with number
+  # 插入页尾，并以数字作为页码
   add_footer nil, text_align: 'center', nums_type: 'number'
-  # insert text
+  # 插入页尾，使用字符作为页码
   # add_footer 'hello', text_align: 'center'
-  # initialize section and insert something in the section
+
   section {
-    # insert title
-    title_1 "It's a title", ignore_dir: true 
-    # insert subtitle
+    # 二级标题
     title_2 "It's a subtitle"
-    # insert title
+    # 一级标题
     title_1 'Database'
-    # insert subtitle
+    # 二级标题
     title_2 'MySQL'
-    # insert No.3 title
+    # 三级标题
     title_3 'NoSQL'
-    # text break
+    # 一级标题，并且不把它列入目录生成的范围
+    title_1 "It's a title", ignore_dir: true 
+    # 空白行
     text_break 3
-    # insert text
+    # 插入文本并指定样式
     text 'hello word', bgcolor: 'yellow', text_align: 'center'
-    # page break
+    # 空白页
     page_break 2
-    # insert text
+    # 插入文本
     text 'hello word', indent_between: '1440-1440'
     text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
 
-    # insert title
+    # 插入标题
     title_1 'section2 title'
     title_2 'section2 title'
     title_3 'section2 title'
 
-    # add a link
+    # 插入链接
     link 'baidu', 'http://www.baidu.com', text_align: 'center'
   }
 
   section {
-    # insert a text
+    # 插入文本
     text 'another Section', bgcolor: 'yellow', text_align: 'center'
 
-    # insert a text
+    # 插入文本
     text 'hello word', indent_between: '1440-1440'
     text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
   }
 
+  # 插入列表
   section {
     list 'test1', 1
     list 'test1', 2
@@ -101,20 +117,21 @@ Rubyword::Document::generate('hello.docx') {
   }
 
   section {
-    # add a link
+    # 插入链接
     link 'baidu', 'http://www.baidu.com', text_align: 'center'
+    # 插入图片
     image 'http://www.baidu.com/img/bd_logo1.png'
   }
 }
 ```
 
 # 马上要做的
-+ Support table
-+ Support more style
-+ Support Markdown/HTML to docx
++ 支持表格
++ 支持更多样式
++ 支持markdown/html转换为word
 
 # 贡献
-RubyWord is use my spare time to write, so it may has a lot of Bugs and welcome everyone to create Pull Request or Issue to improve this project together.
+非常欢迎各位有兴趣的朋友加入到开发中，以下是提交流程
 1. fork this project
 2. git clone your fork project
 3. git checkout -b fixed-something
@@ -123,7 +140,7 @@ RubyWord is use my spare time to write, so it may has a lot of Bugs and welcome 
 6. create a new pr to request merge
 
 # 灵感
-Thanks [PHPWord](https://github.com/PHPOffice/PHPWord), I was very surprised when I saw the PHPWord project which is a very powerful project and provide a lot of features. But I can't find such as ruby project when i search in google and I decided to write and design by myself.
+首先非常感谢 [PHPWord](https://github.com/PHPOffice/PHPWord), 因为在无意中发现了 PHPWord 的这个非常强大项目， 并且该项目支持很多各种各样的特性。但是当我在寻找我大 Ruby 这类相关项目的时候居然找不到，本着学习的精神，参考了 PHPWord 的设计，就自己写了一个啦，欢迎 Star 支持一下。
 
-# 开源协议
+# 协议
 RubyWord is licensed under [The MIT License](LICENSE)

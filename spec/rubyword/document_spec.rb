@@ -22,14 +22,5 @@ module Rubyword
         expect(section3.section_id).to eq(3)
       end
     end
-
-    describe "add page break" do
-      it "save page break to PageBreak Object" do
-        object = Element::PageBreak.new(@document)
-        object.save(1)
-        expect(object.numbers.size.to_i).to eq(1)
-      end
-    end
-
   end
 end

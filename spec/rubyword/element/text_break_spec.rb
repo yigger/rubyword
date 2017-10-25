@@ -5,28 +5,28 @@ module Rubyword
       @document = Document.new
     end
     let(:page_num) { 2 }
-    describe "Add pagebreak" do
-      subject(:pagebreak) { 
-        pagebreak = Element::PageBreak.new(@document)
-        pagebreak.save(page_num)
-        pagebreak
+    describe "Add TextBreak" do
+      subject(:textbreak) { 
+        textbreak = Element::TextBreak.new(@document)
+        textbreak.save(page_num)
+        textbreak
       }
 
-      it "save page break to PageBreak Object" do
-        expect(pagebreak.numbers.size.to_i).to eq(1)
+      it "save page break to textbreak Object" do
+        expect(textbreak.numbers.size.to_i).to eq(1)
       end
 
       it "check the numbers pop" do
-        number = pagebreak.numbers.pop
+        number = textbreak.numbers.pop
         expect(number).to eq(page_num)
-        expect(pagebreak.numbers.size.to_i).to eq(0)
+        expect(textbreak.numbers.size.to_i).to eq(0)
       end
 
-      it "Write pagebreak xml" do
+      it "Write textbreak xml" do
         build = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
           xml.send('w:document') {
             xml.send('w:body') {
-              pagebreak.write(nil, xml)
+              textbreak.write(nil, xml)
             }
           }
         end
@@ -34,16 +34,7 @@ module Rubyword
           <?xml version="1.0" encoding="UTF-8"?>
           <w:document>
             <w:body>
-              <w:p>
-                <w:r>
-                  <w:br w:type="page"/>
-                </w:r>
-              </w:p>
-              <w:p>
-                <w:r>
-                  <w:br w:type="page"/>
-                </w:r>
-              </w:p>
+              <w:p/><w:p/>
             </w:body>
           </w:document>
         EOL
