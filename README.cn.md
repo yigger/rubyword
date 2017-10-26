@@ -1,9 +1,12 @@
 # RubyWord: Microsoft Word Generation For Ruby
-> RubyWord 是一个简单， 高效的 word 文档生成工具
+> RubyWord 是一个便捷的 word 文档生成工具
 
-# Language
+# 语言
 * [English](README.md)
 * [简体中文](README.cn.md)
+
+# 更新日志
+[ChANGELOG](CHANGELOG.md)
 
 # 使用前请先阅读
 这个项目正在开发中，因为只有我自己在开发，所以进度可能会比较缓慢以及可能会存在很多未知的问题(:跑)，但是我会尽我所能，尽量挤出时间去完善它，同时也希望各位有兴趣的朋友也加入到开发来，欢迎多提宝贵意见或者直接提PR也是非常欢迎的，感谢支持。
@@ -125,13 +128,16 @@ Rubyword::Document::generate('hello.docx') {
 }
 ```
 
+# 文档
+[查看文档](doc/README.md)
+
 # 马上要做的
 + 支持表格
 + 支持更多样式
 + 支持markdown/html转换为word
 
 # 贡献
-非常欢迎各位有兴趣的朋友加入到开发中，以下是提交流程
+非常欢迎有兴趣的朋友加入到开发中，以下是提交流程
 1. fork this project
 2. git clone your fork project
 3. git checkout -b fixed-something

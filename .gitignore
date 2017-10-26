@@ -5,6 +5,6 @@
 .yardoc
 Gemfile.lock
 temp
-sample/*
+sample/*.docx
 .idea/*
 .vscode

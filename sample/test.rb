@@ -1,7 +1,7 @@
 require_relative '../lib/rubyword'
 filename = File.join(Rubyword::TEMP_PATH, 'hello.docx')
 Rubyword::Document::generate(filename) {
-  # write the doc infomation
+  # # write the doc infomation
   # information({
   #   company: 'ruby word',
   #   creator: 'young',
@@ -13,16 +13,16 @@ Rubyword::Document::generate(filename) {
   # })
   
   section {
-    text '普通段落1'
+    text 'hello'
     p(text_align: 'center') {
-      text '连续的文本1'
-      text '连续的文本'
+      text 'i am '
+      text 'a boy'
     }
-    text '普通段落2'
-
+    text 'welcome to my home..'
+  
     p {
-      text '不居中的文本 '
-      text '黄色的文本', bgcolor: 'yellow', text_align: 'center'
+      text 'This is a '
+      text 'apple, yellow apple', bgcolor: 'yellow', text_align: 'center'
     }
   }
 

@@ -5,6 +5,9 @@
 * [English](README.md)
 * [简体中文](README.cn.md)
 
+# CHANGELOG
+[ChANGELOG](CHANGELOG.md)
+
 # Please Read Before Use
 This project is under developing, and develop by myself until now, so the progress may be slow and there may be a lot of problems, but i will try my best to improve it and welcome everyone to join the development. Thanks for supporting.
 
@@ -107,6 +110,8 @@ Rubyword::Document::generate('hello.docx') {
   }
 }
 ```
+# Document
+[More Information](doc/README.md)
 
 # TODO
 + Support table

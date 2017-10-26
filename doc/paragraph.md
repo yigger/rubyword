@@ -1,4 +1,4 @@
-# Text
+# Paragraph
 
 ## Style
 + font_size: Number | 16
@@ -17,9 +17,10 @@
 ```
 Rubyword::Document::generate('hello.docx') {
   section {
-    text "hello world"
-    # add some style
-    text "hello", { font_size: 62, color: '996699', blod: true, text_align: 'center' }
+    p {
+      text 'This is a '
+      text 'apple, yellow apple', bgcolor: 'yellow', text_align: 'center'
+    }
   }
 }
 ```

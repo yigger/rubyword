@@ -22,10 +22,10 @@ module Rubyword
         indent_between: 'w:ind'
       }.freeze
 
-      def save(text, type, style)
+      def save(text, type=nil, style=nil)
         @texts ||= Queue.new
         @section.titles ||= []
-        return if text.nil?
+        return if text.nil? || type.nil?
         if type == 'text'
           text(text, style)
         else
@@ -69,6 +69,7 @@ module Rubyword
       def write(section=nil, xml=nil)
         @xml, @section = xml, section
         text = self.texts.pop
+        return if text.to_s.empty?
         eval "write_#{text[:size]}(text)"
       end
 
