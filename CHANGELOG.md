@@ -1,4 +1,5 @@
-CHANGELOG
+# CHANGELOG
+
 # Version 1.1.0 - 2017-10-26
 + add paragraph feature
 ```
@@ -18,6 +19,7 @@ section {
 ```
 
 # Version 1.0.0 - 2017-10-21
+
 + Support for setting the properties of the document, such as: title, subject, author and other information
 + Support for generated TOC for the title
 + Support for setting header and footer
