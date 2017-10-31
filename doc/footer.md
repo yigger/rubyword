@@ -1,9 +1,10 @@
 # Footer
 
-# Options
+## Options
 + text_align: 'left' | 'center' | 'right'
 + nums_type: 'number' | 'roman', Desc: when you need page numer as a footer, the text(first param) must be nil
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   # insert footer with page number

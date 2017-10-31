@@ -1,5 +1,6 @@
 # Link
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   section {

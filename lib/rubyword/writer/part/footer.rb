@@ -20,12 +20,7 @@ module Rubyword
           builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
             xml.send('w:ftr', ATTRIBUTE) {
               xml.p {
-                if footer[:text_align]
-                  xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => footer[:text_align])
-                  }
-                end
-                
+                Writer::Style::Paragraph.new(@section, xml, @rubyword).write(footer[:style])
                 nums_type = footer[:nums_type].to_s.downcase
                 if footer[:text].nil? || nums_type == 'roman' || nums_type == 'number'
                   text = 'PAGE'

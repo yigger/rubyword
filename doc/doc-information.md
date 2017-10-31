@@ -1,5 +1,6 @@
 # Doc Information
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   information({

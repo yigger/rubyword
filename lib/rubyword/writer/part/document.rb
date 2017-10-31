@@ -52,6 +52,9 @@ module Rubyword
             end
           end
 
+          if @rubyword.sections.empty?
+            Style::Section.new(section, xml, @rubyword).write 
+          end
         end
         
       end # end of class

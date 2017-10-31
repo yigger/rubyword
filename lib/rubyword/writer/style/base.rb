@@ -5,7 +5,6 @@ module Rubyword
       class Base
         attr_accessor :rubyword, :style, :section, :xml
         def initialize(section, xml, rubyword)
-          @style = section.style
           @section = section
           @xml = xml
           @rubyword = rubyword

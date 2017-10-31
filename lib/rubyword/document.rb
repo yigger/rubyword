@@ -37,45 +37,29 @@ module Rubyword
       @toc.merge!(option)
     end
 
-    def add_header(text, options={})
-      @header = {
-        id: 1,
-        text: text,
-        rid: self.init_rid,
-        text_align: options[:align] || 'center',
-        type: 'header'
-      }
-      self.content_types << {
-        "/word/header1.xml" => "application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"
-      }
-      self.rels_documents << {
-        Id: "rId#{self.init_rid}", 
-        Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/header", 
-        Target: "header1.xml"
-      }
-      self.init_rid = self.init_rid + 1
+    # add header and footer
+    ['header', 'footer'].each do |method_name|
+      define_method "add_#{method_name}" do |text, options={}|
+        instance_variable_set("@#{method_name}", {
+                                id: 1,
+                                text: text,
+                                rid: self.init_rid,
+                                type: method_name,
+                                style: options
+                              })
+        self.content_types << {
+          "/word/#{method_name}1.xml" => "application/vnd.openxmlformats-officedocument.wordprocessingml.#{method_name}+xml"
+        }
+        self.rels_documents << {
+          Id: "rId#{self.init_rid}", 
+          Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/#{method_name}", 
+          Target: "#{method_name}1.xml"
+        }
+        self.init_rid = self.init_rid + 1
+      end
     end
 
-    def add_footer(text=nil, options={})
-      @footer = {
-        id: 1,
-        text: text,
-        rid: self.init_rid,
-        text_align: options[:align] || 'center',
-        nums_type: options[:nums_type],
-        type: 'footer'
-      }
-      self.content_types << {
-        "/word/footer1.xml" => "application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"
-      }
-      self.rels_documents << {
-        Id: "rId#{self.init_rid}", 
-        Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footer",
-        Target: "footer1.xml"
-      }
-      self.init_rid = self.init_rid + 1
-    end
-
+    # initialize doc information
     def information(options={})
       @doc_info = options
     end

@@ -28,7 +28,7 @@ module Rubyword
         expect(text.pop.to_s).to eq({size: 'normal', text: string, style: nil}.to_s)
       end
 
-      it 'write xml' do
+      it 'should output xml' do
         string = 'sample'
         text_obj.save(string, 'text')
         build = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|

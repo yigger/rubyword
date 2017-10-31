@@ -3,6 +3,7 @@
 ## Options
 + ignore_dir: Boolean. Desc: Doc will ignore add this title to TOC
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   section {

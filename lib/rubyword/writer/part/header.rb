@@ -16,15 +16,11 @@ module Rubyword
         }
 
         def write
-          text_align = @rubyword.header[:text_align]
+          header = @rubyword.header
           builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
             xml.send('w:hdr', ATTRIBUTE) {
               xml.p {
-                if text_align
-                  xml.send('w:pPr') {
-                    xml.send('w:jc', 'w:val' => text_align)
-                  }
-                end
+                Writer::Style::Paragraph.new(@section, xml, @rubyword).write(header[:style])
                 xml.send('w:r') { 
                   xml.send('w:t', {'xml:space' => "preserve"}, @rubyword.header[:text])
                 }

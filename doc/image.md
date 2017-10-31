@@ -1,5 +1,6 @@
 # Image
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   section {

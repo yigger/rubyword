@@ -1,27 +1,10 @@
-# -*- encoding : utf-8 -*-
 module Rubyword
   module Element
     class Text < Base
       attr_accessor :texts
-      
+      # Toc indent size
       IndentSize = 200
-      WordStyleList = {
-        font_size: 'w:sz',
-        color: 'w:color',
-        underline: 'w:u', 
-        blod: 'w:b', 
-        all_caps: 'w:caps',
-        italic: 'w:i',
-        bgcolor: 'w:highlight'
-      }.freeze
-      ParagraphStyleList = {
-        text_align: 'w:jc',
-        spacing: 'w:spacing',
-        indent_left: 'w:ind',
-        indent_right: 'w:ind',
-        indent_between: 'w:ind'
-      }.freeze
-
+      
       def save(text, type=nil, style=nil)
         @texts ||= Queue.new
         @section.titles ||= []
@@ -40,15 +23,15 @@ module Rubyword
       (1..4).each do |num|
         define_method "title_#{num}" do |text, style|
           @rubyword.relation_rids << {rid: @rubyword.init_rid, type: "title_#{num}"}
-          title_hs = {
+          title_info = {
             indent: (num - 1) * IndentSize,
             size: "title_#{num}",
             text: text.to_s,
             rid: @rubyword.init_rid,
             style: style
           }
-          @section.titles << title_hs if (style && !style[:ignore_dir]) || style.nil?
-          @texts << title_hs
+          @section.titles << title_info if (style && !style[:ignore_dir]) || style.nil?
+          @texts << title_info
           @rubyword.init_rid = @rubyword.init_rid + 1
         end
 
@@ -74,61 +57,11 @@ module Rubyword
       end
 
       def write_normal(text)
-        @xml.send('w:p') { 
-          write_paragraph_style(text[:style])
+        @xml.send('w:p') {
+          Writer::Style::Paragraph.new(@section, @xml, @rubyword).write(text[:style])
           @xml.send('w:r') do
-            write_word_style(text[:style])
+            Writer::Style::Word.new(@section, @xml, @rubyword).write(text[:style])
             @xml.send('w:t', {'xml:space' => 'preserve'}, text[:text])
-          end
-        }
-      end
-
-      def write_word_style(style)
-        if !style.nil? && style.is_a?(Hash)
-          @xml.send('w:rPr') {
-            style.keys.each do |style_name|
-              style_name = style_name.to_sym
-              if WordStyleList.keys.include?(style_name)
-                value =style[style_name]
-                attribute = if !!value != value # not a bool type
-                              {'w:val' => value}
-                            else
-                              nil
-                            end
-                doc_style = WordStyleList[style_name]
-                @xml.send(doc_style, attribute)
-                @xml.send('w:szCs', attribute) if style_name == :font_size
-              end
-            end
-          }
-        end
-      end
-      
-      def write_paragraph_style(style)
-        return unless !style.nil? && style.is_a?(Hash)
-        @xml.send('w:pPr') {
-          style.keys.each do |style_name|
-            style_name = style_name.to_sym
-            next unless ParagraphStyleList.keys.include?(style_name)
-            value =style[style_name]
-            attribute = case style_name.to_s
-                        when 'spacing'
-                          {'w:after' => value}
-                        when 'indent_left'
-                          {'w:left' => value}
-                        when 'indent_right'
-                          {'w:right' => value}
-                        when 'indent_between'
-                          v = value.split '-'
-                          next unless v.is_a?(Array)
-                          { 'w:left' => v[0].to_i, 'w:right' => v[1].to_i }
-                        when !!value == value
-                          nil
-                        else
-                          {'w:val' => value}
-                        end
-            doc_style = ParagraphStyleList[style_name]
-            @xml.send(doc_style, attribute)
           end
         }
       end

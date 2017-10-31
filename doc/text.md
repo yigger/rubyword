@@ -14,6 +14,7 @@
 + indent_right: Number 200
 + indent_between: Number 200
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   section {

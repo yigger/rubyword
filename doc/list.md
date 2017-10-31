@@ -1,8 +1,9 @@
 # List
 
-# Options
+## Options
 + level: Number
 
+## Example
 ```
 Rubyword::Document::generate('hello.docx') {
   section {
