@@ -27,7 +27,7 @@ module Rubyword
         @objects << object
       end
 
-			def text(text, style=nil)
+      def text(text, style=nil)
         object ||= Text.new(@rubyword, self)
         object.save(text, __callee__.to_s, style)
         @objects << object
@@ -43,15 +43,15 @@ module Rubyword
         @objects << object
       end
 
-      def image(url)
-        object ||= Image.new(@rubyword)
-        object.save(url)
-        @objects << object
-      end
-
       def link(text, link, style=nil)
         object ||= Link.new(@rubyword)
         object.save(text, link, style)
+        @objects << object
+      end
+
+      def image(url)
+        object ||= Image.new(@rubyword)
+        object.save(url)
         @objects << object
       end
 

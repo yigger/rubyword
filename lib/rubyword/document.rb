@@ -32,6 +32,12 @@ module Rubyword
       @section
     end
 
+    # initialize doc information
+    def information(options={})
+      @doc_info = options
+    end
+
+    # generate TOC 
     def title_directory(option= {})
       @toc.merge!(open: true)
       @toc.merge!(option)
@@ -57,11 +63,6 @@ module Rubyword
         }
         self.init_rid = self.init_rid + 1
       end
-    end
-
-    # initialize doc information
-    def information(options={})
-      @doc_info = options
     end
 
   end

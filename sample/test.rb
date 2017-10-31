@@ -76,13 +76,13 @@ Rubyword::Document::generate(filename) {
   #   text 'title', { font_size: 62, color: '996699', blod: true, text_align: 'center' }
   # }
 
-  # section {
-  #   list 'test1', 1
-  #   list 'test1', 2
-  #   list 'test3', 2
-  #   list 'test2', 1
-  #   list 'test2', 1
-  # }
+  section {
+    list 'test1', 1, { font_size: 62, color: '996699', blod: true, text_align: 'center' }
+    list 'test1', 2
+    list 'test3', 2
+    list 'test2', 1
+    list 'test2', 1
+  }
 
   # section {
   #   # add a link

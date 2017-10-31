@@ -3,16 +3,17 @@ module Rubyword
     module Element
       class Link < Base
         attr_accessor :links
-        def save(text, link, style)
+        def save(text, link, style=nil)
 					@links ||= Queue.new
-					return if text.nil?
+          return if text.nil?
+          text = filter_text(text)
 					@rubyword.rels_documents << {
 						Id: "rId#{@rubyword.init_rid}",
 						Type: 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink',
 						Target: link,
 						TargetMode: 'External'
 					}
-					@links << { rId: @rubyword.init_rid, text: text, link: link }
+					@links << { rId: @rubyword.init_rid, text: text, link: link, style: style }
 					@rubyword.init_rid = @rubyword.init_rid + 1
         end
 				
@@ -22,8 +23,7 @@ module Rubyword
           @xml.send('w:p') {
             @xml.send('hyperlink', 'r:id' => "rId#{link[:rId]}", 'w:history' => '1') {
               @xml.send('w:r') {
-                # TODO: add style
-                @xml.send('w:rPr')
+                Writer::Style::Word.new(@section, @xml, @rubyword).write(link[:style])
                 @xml.send('w:t', {'xml:space' => 'preserve'}, link[:text])
               }
             }

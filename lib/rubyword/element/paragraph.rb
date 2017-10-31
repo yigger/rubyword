@@ -10,6 +10,7 @@ module Rubyword
       
       def text(text, style=nil)
         @paragraphs ||= []
+        text = filter_text(text)
         @paragraphs << {
           text: text,
           style: style
@@ -28,7 +29,7 @@ module Rubyword
           end
         }
       end
-
+      
       def method_missing(name, *arg)
         @section.send(name.to_sym, *arg)
       end

@@ -9,6 +9,7 @@ module Rubyword
         @texts ||= Queue.new
         @section.titles ||= []
         return if text.nil? || type.nil?
+        text = filter_text(text)
         if type == 'text'
           text(text, style)
         else
@@ -17,7 +18,7 @@ module Rubyword
       end
 
       def text(text, style)
-        @texts << { size: 'normal', text: text.to_s, style: style }
+        @texts << { size: 'normal', text: text, style: style }
       end
 
       (1..4).each do |num|

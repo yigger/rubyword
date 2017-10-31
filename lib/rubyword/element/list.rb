@@ -7,9 +7,11 @@ module Rubyword
       # write document and numbering
       def save(text, level, style)
         @lists ||= Queue.new
+        text = filter_text(text)
         @lists << {
           level: level.to_i - 1,
-          text: text
+          text: text,
+          style: style
         }
       end
 
@@ -24,7 +26,7 @@ module Rubyword
             }
           }
           @xml.send('w:r') {
-            @xml.send('w:rPr')
+            Writer::Style::Word.new(@section, @xml, @rubyword).write(list[:style])
             @xml.send('w:t', {'xml:space' => 'preserve'}, list[:text])
           }
         }
