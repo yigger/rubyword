@@ -99,11 +99,19 @@ Rubyword::Document::generate(filename) {
   section {
     table {
       tr {
-        th 'h'
+        th 'h0'
+        th 'h1'
+        th 'h2'
+        th 'h3'
+        th 'h4'
       }
       tr {
-        th 'b'
+        th 'b1'
+        th 'b2'
+        th 'b3'
+        th 'b4'
       }
     }
+    text 'aa'
   }
 }

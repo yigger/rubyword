@@ -2,22 +2,18 @@
 module Rubyword
   module Element
     class Table < Base
-      attr_accessor :trs, :texts
-
+      attr_accessor :trs
       def initialize(rubyword, section=nil, style)
         super(rubyword, section)
         @style = style
         @trs ||= []
-        @texts ||= []
       end
       
       def tr(style=nil, &block)
         return unless block_given?
-        self.instance_eval(&block)
-      end
-
-      def th(text)
-        @texts << {text: text}
+        tr = Tr.new
+        tr.instance_eval(&block)
+        @trs << tr
       end
 
       def write(section=nil, xml=nil)
@@ -28,21 +24,19 @@ module Rubyword
             @xml.send('w:gridCol', 'w:w' => '1750', 'w:type' => 'dxa')
             @xml.send('w:gridCol', 'w:w' => '1750', 'w:type' => 'dxa')
           }
-
-          (1..2).each do |row|
+          @trs.each do |tr|
             @xml.send('w:tr') {
               @xml.send('w:trPr')
-              # 每一列
-              (1..3).each do |cell|
+              tr.texts.each do |text|
                 @xml.send('w:tc') {
                   @xml.send('w:tcPr') {
                     @xml.send('w:tcW', 'w:w'=>'1750', 'w:type' => 'dxa')
                   }
                   @xml.send('w:p') {
-                    # Writer::Style::Paragraph.new(@section, @xml, @rubyword).write(text[:style])
+                    Writer::Style::Paragraph.new(@section, @xml, @rubyword).write(text[:style])
                     @xml.send('w:r') do
-                      # Writer::Style::Word.new(@section, @xml, @rubyword).write(text[:style])
-                      @xml.send('w:t', {'xml:space' => 'preserve'}, '2333')
+                      Writer::Style::Word.new(@section, @xml, @rubyword).write(text[:style])
+                      @xml.send('w:t', {'xml:space' => 'preserve'}, text[:text])
                     end
                   }
                 }
@@ -53,5 +47,14 @@ module Rubyword
       end
 
     end
+
+    class Tr
+      attr_accessor :texts
+      def th(text, style=nil)
+        @texts ||= []
+        @texts << { text: text, style: style }
+      end
+    end
+
   end
 end
