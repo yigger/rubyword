@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 require_relative 'base'
 require_relative 'text'
 require_relative 'link'
@@ -7,6 +6,7 @@ require_relative 'image'
 require_relative 'page_break'
 require_relative 'text_break'
 require_relative 'paragraph'
+require_relative 'table'
 module Rubyword
   module Element
     class Section
@@ -23,7 +23,15 @@ module Rubyword
       
       def p(style=nil, &block)
         object ||= Paragraph.new(@rubyword, self, style)
-        object.instance_eval(&block) if block_given?
+        return nil unless block_given?
+        object.instance_eval(&block) 
+        @objects << object
+      end
+
+      def table(style=nil, &block)
+        object ||= Table.new(@rubyword, self, style)
+        return nil unless block_given?
+        object.instance_eval(&block)
         @objects << object
       end
 

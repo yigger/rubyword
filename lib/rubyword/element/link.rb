@@ -21,6 +21,7 @@ module Rubyword
 					@xml = xml
           link = self.links.pop
           @xml.send('w:p') {
+            Writer::Style::Paragraph.new(@section, @xml, @rubyword).write(link[:style])
             @xml.send('hyperlink', 'r:id' => "rId#{link[:rId]}", 'w:history' => '1') {
               @xml.send('w:r') {
                 Writer::Style::Word.new(@section, @xml, @rubyword).write(link[:style])
