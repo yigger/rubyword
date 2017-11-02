@@ -21,9 +21,9 @@ module Rubyword
         @xml = xml
         @xml.send('w:p') { 
           @paragraphs.each do |p|
-            write_paragraph_style(@style)
+            Writer::Style::Paragraph.new(@section, @xml, @rubyword).write(p[:style])
             @xml.send('w:r') do
-              write_word_style(p[:style])
+              Writer::Style::Word.new(@section, @xml, @rubyword).write(p[:style])
               @xml.send('w:t', {'xml:space' => 'preserve'}, p[:text])
             end
           end

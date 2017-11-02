@@ -9,7 +9,7 @@
 [ChANGELOG](CHANGELOG.md)
 
 # 使用前请先阅读
-这个项目正在开发中，因为只有我自己在开发，所以进度可能会比较缓慢以及可能会存在很多未知的问题(:跑)，但是我会尽我所能，尽量挤出时间去完善它，同时也希望各位有兴趣的朋友也加入到开发来，欢迎多提宝贵意见或者直接提PR也是非常欢迎的，感谢支持。
+这个项目正在开发中，因为只有我自己在开发，所以进度可能会比较缓慢以及可能会存在很多未知的问题。这方面请多谅解，同时也希望各位有兴趣的朋友也加入到开发来，欢迎多提宝贵意见或者直接提PR也是非常欢迎的，感谢支持。
 
 # 安装
 ```
@@ -29,6 +29,7 @@ gem 'rubyword'
 + 支持插入图片
 + 支持插入列表
 + 支持插入超链接
++ 支持插入表格
 + 更多功能，敬请期待..
 
 # 用法说明
@@ -124,7 +125,22 @@ Rubyword::Document::generate('hello.docx') {
     link 'baidu', 'http://www.baidu.com', text_align: 'center'
     # 插入图片
     image 'http://www.baidu.com/img/bd_logo1.png'
+    # 插入表格
+    table {
+      tr {
+        th 'id'
+        th 'name'
+        th 'age'
+      }
+      tr {
+        th '1'
+        th 'young'
+        th '66'
+      }
+    }
   }
+
+
 }
 ```
 
@@ -132,7 +148,6 @@ Rubyword::Document::generate('hello.docx') {
 [查看文档](doc/README.md)
 
 # 马上要做的
-+ 支持表格
 + 支持更多样式
 + 支持markdown/html转换为word
 

@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+file_path = File.join(File.expand_path('../../', __FILE__), 'example')
+puts file_path
+Dir.foreach(file_path) do |filename|
+  real_path = "#{file_path}/#{filename}"
+  next if File.directory?(real_path)
+  if filename != "." and filename != ".."
+    system "ruby #{real_path}"
+    puts "#{filename} done."
+  end
+end

@@ -1,7 +1,8 @@
 # CHANGELOG
 
-# Version 1.1.0 - 2017-10-26
+# Version 1.1.0 - 2017-11-02
 + add paragraph feature
++ add table feature
 ```
 section {
   text 'hello'
@@ -14,6 +15,19 @@ section {
   p {
     text 'This is a '
     text 'apple, yellow apple', bgcolor: 'yellow', text_align: 'center'
+  }
+
+  table {
+    tr {
+      th 'id'
+      th 'name'
+      th 'age'
+    }
+    tr {
+      th '1'
+      th 'young'
+      th '66'
+    }
   }
 }
 ```

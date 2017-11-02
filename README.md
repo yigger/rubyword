@@ -29,7 +29,7 @@ gem 'rubyword'
 + Support for insert multiple images 
 + Support for insert multiple lists 
 + Support for insert hyperlink 
-
++ Support for insert table
 # Usage
 ```
 require "rubyword"
@@ -107,6 +107,19 @@ Rubyword::Document::generate('hello.docx') {
     # add a link
     link 'baidu', 'http://www.baidu.com', text_align: 'center'
     image 'http://www.baidu.com/img/bd_logo1.png'
+    # add table
+    table {
+      tr {
+        th 'id'
+        th 'name'
+        th 'age'
+      }
+      tr {
+        th '1'
+        th 'young'
+        th '66'
+      }
+    }
   }
 }
 ```
@@ -114,7 +127,6 @@ Rubyword::Document::generate('hello.docx') {
 [More Information](doc/README.md)
 
 # TODO
-+ Support table
 + Support more style
 + Support Markdown/HTML to docx
 
